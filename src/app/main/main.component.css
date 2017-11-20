@@ -1,0 +1,13 @@
+
+.mat-tab-label{
+    background-color: #2196F3 !important;
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+    min-width: 10px !important;
+}
+.mat-tab-label-active{
+    background-color: #FFFFFF !important;
+    color: black !important;
+}
+
+.content{ height: 500px;}
