@@ -19,6 +19,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
+import {LoginService} from './login/login.service';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
   authDomain: "uwichem.firebaseapp.com",
@@ -56,7 +58,7 @@ const appRoutes: Routes = [
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
     useClass: HammerGestureConfig 
-}],
+}, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
