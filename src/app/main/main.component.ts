@@ -23,21 +23,17 @@ export class MainComponent implements OnInit {
 
   selectChange(): void{ //update selected state if user changes by clicking header
     this.selected = this.group.selectedIndex;
-    console.log("Selected INDEX: " + this.selected);
 
   }
 
   swipe(eType){ //change selected tab if user swipes the content of a tab
-    console.log(eType);
+    
     if(eType === this.SWIPE_ACTION.RIGHT && this.selected > 0){
-      console.log("movin left")
       this.selected--;
     }
     else if(eType === this.SWIPE_ACTION.LEFT && this.selected < this.tab_num){
-      console.log("movin right")
       this.selected++;
     }
-    console.log(this.selected)
   }
 
 

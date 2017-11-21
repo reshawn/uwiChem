@@ -2,7 +2,8 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit 
 } from '@angular/core';
 import {
   startOfDay,
@@ -12,7 +13,8 @@ import {
   endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours
+  addHours,
+  parse
 } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +23,9 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 const colors: any = {
   red: {
@@ -44,11 +49,13 @@ const colors: any = {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
   
   view: string = 'month';
+  user: string = 'resh@gmail'; //to be obtained from authstate
+  courses: String;
 
   viewDate: Date = new Date();
 
@@ -75,27 +82,54 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
   
-    events: CalendarEvent[] = [
-      {
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        color: colors.red,
-        actions: this.actions
-      },
-      {
-        start: subDays(endOfMonth(new Date()), 3),
-        end: addDays(endOfMonth(new Date()), 3),
-        title: 'A long event that spans 2 months',
-        color: colors.blue
-      },
-    ];
+  events: CalendarEvent[] = [
+  ];
 
-    activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = true;
 
 
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal, private db: AngularFireDatabase) { }
+
+  ngOnInit() {
+    this.setEvents('/Chemistry/users/'+this.user);
+  }
+  setEvents(listPath): void {
+    this.db.object(listPath).valueChanges().subscribe((coursesO: Object) =>{ //get object from observable
+      var temp:any = Object.values(coursesO); //get values array from object
+      this.courses = temp[0]; //assign string of courses to var
+      this.getEvents();
+    });
+  }
+  getEvents():void {
+    var courseA:string[] = this.courses.split(" ");
+    courseA.forEach(element => {
+      this.db.object('/Chemistry/courses/'+element+'/events').valueChanges().subscribe((e: Object) =>{
+        if (e!=null){
+          var events: any = Object.values(e);
+          events.forEach(event => {
+            this.events.push({title: element + ': '+ event.title,
+            start: parse(event.start),
+            end: parse(event.end),
+            color: {
+              primary: event.color,
+              secondary: '#FAE3E3'
+            },
+            draggable: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            }
+          });
+            this.refresh.next(); //trigger next for all observers to get new value (update calendar to new event)
+            
+          })
+          
+        }
+      })
+    });
+
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

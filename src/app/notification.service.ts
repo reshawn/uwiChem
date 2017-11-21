@@ -28,7 +28,6 @@ export class NotificationService {
       return this.messaging.getToken();
     })
     .then((token: string) => {
-      console.log(token);
       this.updateToken(token);
       this.messaging.onMessage(this.handlePayload);
     })
@@ -46,7 +45,6 @@ export class NotificationService {
   }
 
   private handlePayload(payload: FCMPayload){
-    console.log("Message Payload received. ", payload);
     let notification = this.createPersistableNotification(payload);
     this.currentNotification.next(notification);
     this.displayNotification(notification);
