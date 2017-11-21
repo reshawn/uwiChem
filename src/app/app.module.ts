@@ -1,23 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-
 import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
-import { MainComponent } from './main/main.component';
-
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule, Routes } from '@angular/router';
-
-import {
-  MatTabsModule,
-  MatGridListModule,
-} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { MatTabsModule, MatGridListModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
+import { LoginComponent } from './login/login.component';
+import { NotificationService } from './notification.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
@@ -44,6 +38,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
     MatTabsModule,
     BrowserAnimationsModule,
@@ -56,7 +51,7 @@ const appRoutes: Routes = [
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
     useClass: HammerGestureConfig 
-}],
+  }, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
