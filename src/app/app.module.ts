@@ -13,6 +13,8 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { NotificationService } from './notification.service';
 
+import {LoginService} from './login/login.service';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
   authDomain: "uwichem.firebaseapp.com",
@@ -51,7 +53,11 @@ const appRoutes: Routes = [
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
     useClass: HammerGestureConfig 
+<<<<<<< HEAD
   }, NotificationService],
+=======
+}, LoginService],
+>>>>>>> OAauth
   bootstrap: [AppComponent]
 })
 export class AppModule { }
