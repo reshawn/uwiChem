@@ -21,6 +21,7 @@
       "styles": [
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/angular-calendar/css/angular-calendar.css",
         "./app/custTheme1.scss"
       ],
       "scripts": [],

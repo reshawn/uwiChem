@@ -19,6 +19,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'angular-calendar';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DemoUtilsModule } from '../demo-utils/module';
+import { CalendarComponent } from './calendar/calendar.component';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
   authDomain: "uwichem.firebaseapp.com",
@@ -40,6 +47,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     MainComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +60,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
+    CommonModule,
+    FormsModule,
+    NgbModalModule.forRoot(),
+    CalendarModule.forRoot(),
+    DemoUtilsModule,
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
