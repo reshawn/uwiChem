@@ -66,11 +66,8 @@ const appRoutes: Routes = [
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
     useClass: HammerGestureConfig 
-<<<<<<< HEAD
-  }, NotificationService],
-=======
-}, LoginService],
->>>>>>> OAauth
+  }, NotificationService,LoginService],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

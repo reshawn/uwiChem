@@ -15,17 +15,9 @@ export class LoginComponent implements OnInit {
 
   authstate : any ;
   error: any;
-<<<<<<< HEAD
-  user: Observable<firebase.User>;
-  //items: FirebaseListObservable<any[]>;
-
-  constructor(public ngFireAuth: AngularFireAuth) {   //add router variable after 
-    this.user = ngFireAuth.authState;
-=======
 
   constructor(private router: Router, public loginservice : LoginService) {   //add router variable after 
     
->>>>>>> OAauth
   }
 
   ngOnInit() {
