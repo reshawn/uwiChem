@@ -6,3 +6,11 @@
       
 </mat-tab-group>
 </div>
+
+<div *ngIf = "authstate!=null">
+      <h1> AHHH SHIBAI {{ authstate }}! What kinda email address is {{ email }} though?</h1>
+</div>
+
+<br>
+<i>Hey but <button (click)="logOut()"> logout </button> and see what happens </i>
+

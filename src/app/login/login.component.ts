@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-
+import {LoginService} from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,33 +13,35 @@ import * as firebase from 'firebase/app';
 })
 export class LoginComponent implements OnInit {
 
+  authstate : any ;
   error: any;
+<<<<<<< HEAD
   user: Observable<firebase.User>;
   //items: FirebaseListObservable<any[]>;
 
   constructor(public ngFireAuth: AngularFireAuth) {   //add router variable after 
-
     this.user = ngFireAuth.authState;
+=======
+
+  constructor(private router: Router, public loginservice : LoginService) {   //add router variable after 
     
+>>>>>>> OAauth
   }
 
   ngOnInit() {
   }
 
-  loginWithGoogle() {
-    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  signInGoogle(){
+    this.loginservice.loginWithGoogle();
   }
 
-  loginWithFacebook(){
-    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
+  signInFacebook(){
+    this.loginservice.loginWithFacebook();
   }
 
-  loginWithEmail(){
-    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
-  }
 
-  logout() {
-    this.ngFireAuth.auth.signOut();
-  }
+  // loginWithEmail(){
+  //   this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
+  // }
 
 }
