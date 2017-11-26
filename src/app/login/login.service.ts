@@ -45,6 +45,12 @@ export class LoginService {
     }
 
   }
+  
+  get userID(): any {
+    if(this.authstate){
+      return this.authstate.uid;
+    }
+  }
 
   get currentEmail(): any {      //getter to call in other components to manipulate user data
     if (this.authstate) {
