@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
+import { Global } from './global';
 import { MainComponent } from './main/main.component';
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
@@ -18,6 +18,7 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
@@ -29,9 +30,10 @@ export const firebaseConfig = {
 }
 
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component:LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent },
+  {path: 'authenticate',component:AuthenticationComponent},
 
 ];
 
@@ -40,8 +42,10 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     MainComponent,
+    AuthenticationComponent,
   ],
   imports: [
+    AngularFireDatabaseModule,
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
@@ -52,10 +56,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
+    FormsModule,
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
-    useClass: HammerGestureConfig 
+    useClass: HammerGestureConfig,
+    Global
 }],
   bootstrap: [AppComponent]
 })

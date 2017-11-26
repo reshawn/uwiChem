@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<div *ngFor="let Chemistry of authObservable | async">
+  <p>{{Chemistry.authCode}}</p>
+
+ <div class="auth-page">
+  <div class="container">
+
+  <div class="form">
+    <form class="auth-form">
+      <input  input  [(ngModel)]='token' placeholder="Enter the token"[ngModelOptions]="{standalone: true}"/>
+      <button (click)="Authenticate()">Authenticate</button>
+      <!-- add text to tell ppl they get enter wrong code -->
+     </form>
+   </div>
+ </div>
+ </div> 
+</div>
+
+
+
+  
