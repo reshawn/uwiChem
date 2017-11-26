@@ -27,6 +27,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoUtilsModule } from '../demo-utils/module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CoursesComponent } from './courses/courses.component';
+import { NoticesComponent } from './notices/notices.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     MainComponent,
     CalendarComponent,
     CoursesComponent,
+    NoticesComponent
   ],
   imports: [
     BrowserModule,
