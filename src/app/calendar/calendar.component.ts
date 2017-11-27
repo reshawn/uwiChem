@@ -26,6 +26,7 @@ import {
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import {LoginService} from '../login/login.service';
 
 const colors: any = {
   red: {
@@ -54,7 +55,6 @@ export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
   
   view: string = 'month';
-  user: string = 'resh@gmail'; //to be obtained from authstate
   courses: String;
 
   viewDate: Date = new Date();
@@ -86,18 +86,20 @@ export class CalendarComponent implements OnInit {
   ];
 
   activeDayIsOpen: boolean = true;
+  userID: String ;
 
 
-
-  constructor(private modal: NgbModal, private db: AngularFireDatabase) { }
+  constructor(public loginservice : LoginService, private modal: NgbModal, private db: AngularFireDatabase) {
+    this.userID = loginservice.userID;
+   }
 
   ngOnInit() {
-    this.setEvents('/Chemistry/users/'+this.user);
+    this.setEvents('/Chemistry/users/'+this.userID+'/courseList');
   }
   setEvents(listPath): void {
-    this.db.object(listPath).valueChanges().subscribe((coursesO: Object) =>{ //get object from observable
-      var temp:any = Object.values(coursesO); //get values array from object
-      this.courses = temp[0]; //assign string of courses to var
+    this.db.object(listPath).valueChanges().subscribe((courses: String) =>{ //get object from observable
+      this.courses = courses; //assign string of courses to var
+      console.log(this.courses);
       this.getEvents();
     });
   }
