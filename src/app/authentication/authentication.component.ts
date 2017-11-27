@@ -29,8 +29,8 @@ export class AuthenticationComponent implements OnInit {
       this.AdminCode=AdminCode[0]
       console.log(this.AdminCode)
     });
-   this.service.StudentCode='1';
-   console.log(this.service.StudentCode);
+   this.service.AuthCode='1';
+   console.log(this.service.AuthCode);
    this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
     this.stuCode=stuCode[1]
     console.log(this.stuCode)
@@ -40,7 +40,7 @@ export class AuthenticationComponent implements OnInit {
     return this.db.list(listPath).valueChanges();
   }
   Authenticate(){
-    this.token, this.x
+    this.token;
     if(this.token==this.AdminCode) {      
       console.log('They have matched the values you are a admin ggwp');
       this.service.AuthCode='2';
@@ -56,7 +56,7 @@ export class AuthenticationComponent implements OnInit {
     }
     else if((this.token!=this.AdminCode)&&this.token!=this.stuCode){
       //Do error and redirect
-      this.errorMsg='Fagets are bad';
+      this.errorMsg='Invalid Code entered. Re-enter code.';
       this.router.navigate(['/authenticate']);
     }
   }
