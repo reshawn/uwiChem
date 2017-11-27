@@ -72,11 +72,6 @@ const appRoutes: Routes = [
       appRoutes
     ),
     FormsModule,
-  ],
-  providers: [{ 
-    provide: HAMMER_GESTURE_CONFIG, 
-    useClass: HammerGestureConfig,
-},GlobalsService],
     CommonModule,
     FormsModule,
     NgbModalModule.forRoot(),
@@ -85,9 +80,10 @@ const appRoutes: Routes = [
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
-    useClass: HammerGestureConfig 
-  }, NotificationService,LoginService],
-  
+    useClass: HammerGestureConfig,
+},GlobalsService, NotificationService,LoginService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

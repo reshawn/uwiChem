@@ -78,7 +78,7 @@ export class LoginService {
       console.log("AHH SHIBAAA");
       console.log(error);
     });
-    this.router.navigate(['/main']);     //navigating first incase saving user email takes long eventually.
+    this.router.navigate(['/authenticate']);     //navigating first incase saving user email takes long eventually.
     console.log("Email to be added: " + this.authstate.email);
     this.saveUserEmail(this.authstate.email);
   }
@@ -93,7 +93,7 @@ export class LoginService {
       console.log("AHH SHIBAAAI");
       console.log(error);
     });
-    this.router.navigate(['/main']);
+    this.router.navigate(['/authenticate']);
     console.log("Email to be added: " + this.authstate.email);
     this.saveUserEmail(this.authstate.email);
   }
