@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import * as firebase from 'firebase';
 import {AngularFireList} from 'angularfire2/database'
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Global } from './global';
+import {GlobalsService} from 'app/globals.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -18,30 +18,46 @@ import { Global } from './global';
 })
 export class AuthenticationComponent implements OnInit {
   authObservable: Observable<any[]>;
-  x:String;
+  AdminCode:String;
   token: string;
-  
-  constructor(private db: AngularFireDatabase,public router: Router,private global: Global) { }
+  stuCode:string;
+  errorMsg:string='';
+  constructor(private db: AngularFireDatabase,public router: Router,private service:GlobalsService) { }
   ngOnInit() {
-    this.authObservable = this.getAuthCode('/');
-    this.getAuthCode('/Chemistry').subscribe(x => {
-      this.x=x[0]
-      console.log(this.x)
-    });
    
+    this.getAuthCode('/Chemistry/Auth').subscribe(AdminCode => {
+      this.AdminCode=AdminCode[0]
+      console.log(this.AdminCode)
+    });
+   this.service.StudentCode='1';
+   console.log(this.service.StudentCode);
+   this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
+    this.stuCode=stuCode[1]
+    console.log(this.stuCode)
+  });
   }
   getAuthCode(listPath): Observable<any[]> {
     return this.db.list(listPath).valueChanges();
   }
   Authenticate(){
     this.token, this.x
-    if(this.token==this.x) {
-      console.log('They have matched the values');
+    if(this.token==this.AdminCode) {      
+      console.log('They have matched the values you are a admin ggwp');
+      this.service.AuthCode='2';
+      this.router.navigate(['/main']);
+      
+      
+    }
+    else if(this.token==this.stuCode){
+      console.log('we did it lads');
+      this.service.AuthCode='1';
       this.router.navigate(['/main']);
 
-    }else{
+    }
+    else if((this.token!=this.AdminCode)&&this.token!=this.stuCode){
       //Do error and redirect
-      this.router.navigate(['/login']);
+      this.errorMsg='Fagets are bad';
+      this.router.navigate(['/authenticate']);
     }
   }
 
