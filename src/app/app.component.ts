@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'UwiChem';
-  
+  constructor(private notificationService: NotificationService){
+    this.notificationService.getPermission();
+  }
 }
