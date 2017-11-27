@@ -39,7 +39,8 @@ export class MainComponent implements OnInit {
   constructor(private service:GlobalsService) { }
 
   ngOnInit() {
-    console.log(this.service.AuthCode);
+    console.log(this.service.AdminCode);
+    console.log(this.service.StudentCode);
   }
 
 }

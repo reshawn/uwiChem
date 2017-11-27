@@ -1,10 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding  } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { LoginService } from './login.service';
 
 
 @Component({
@@ -14,27 +13,33 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
 
-  authstate: any;
   error: any;
+  user: Observable<firebase.User>;
+  //items: FirebaseListObservable<any[]>;
 
-  constructor(private router: Router, public loginservice: LoginService) {   //add router variable after 
+  constructor(public ngFireAuth: AngularFireAuth) {   //add router variable after 
 
+    this.user = ngFireAuth.authState;
+    
   }
 
   ngOnInit() {
   }
 
-  signInGoogle() {
-    this.loginservice.loginWithGoogle();
+  loginWithGoogle() {
+    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
-  signInFacebook() {
-    this.loginservice.loginWithFacebook();
+  loginWithFacebook(){
+    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
   }
 
+  loginWithEmail(){
+    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
+  }
 
-  // loginWithEmail(){
-  //   this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
-  // }
+  logout() {
+    this.ngFireAuth.auth.signOut();
+  }
 
 }
