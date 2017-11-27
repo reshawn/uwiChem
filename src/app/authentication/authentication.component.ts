@@ -56,7 +56,7 @@ export class AuthenticationComponent implements OnInit {
     }
     else if((this.token!=this.AdminCode)&&this.token!=this.stuCode){
       //Do error and redirect
-      this.errorMsg='Invalid Code';
+      this.errorMsg='Fagets are bad';
       this.router.navigate(['/authenticate']);
     }
   }
