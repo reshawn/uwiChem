@@ -19,8 +19,6 @@ export class LoginService {
       this.authstate = auth;
     })
 
-
-
   }
 
 
@@ -80,7 +78,7 @@ export class LoginService {
       console.log("AHH SHIBAAA");
       console.log(error);
     });
-    this.router.navigate(['/main'])     //navigating first incase saving user email takes long eventually.
+    this.router.navigate(['/main']);     //navigating first incase saving user email takes long eventually.
     console.log("Email to be added: " + this.authstate.email);
     this.saveUserEmail(this.authstate.email);
   }
@@ -95,7 +93,7 @@ export class LoginService {
       console.log("AHH SHIBAAAI");
       console.log(error);
     });
-    this.router.navigate(['/main'])
+    this.router.navigate(['/main']);
     console.log("Email to be added: " + this.authstate.email);
     this.saveUserEmail(this.authstate.email);
   }
@@ -104,11 +102,12 @@ export class LoginService {
     this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
   }
 
+  
       //logout mysteriously doesn't work
-
-      // logout() : void {
-      //    this.ngFireAuth.auth.signOut();
-      //   //navigate if neccessary  or this.router.navigate(['/'])
-      // }
+  logout() : void {
+      this.ngFireAuth.auth.signOut();
+      this.router.navigate(['/login'])
+        //navigate if neccessary  or this.router.navigate(['/'])
+      }
 
 }

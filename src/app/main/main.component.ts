@@ -34,6 +34,7 @@ export class MainComponent implements OnInit {
     else if(eType === this.SWIPE_ACTION.LEFT && this.selected < this.tab_num){
       this.selected++;
     }
+    
   }
 
 
@@ -42,14 +43,10 @@ export class MainComponent implements OnInit {
     this.email = loginservice.currentEmail;
   }
 
-  //logout currently selling dreams.
-
-  // logOut(){
-  //   console.log("SHH SHAABA");
-  //   this.loginservice.logout() ;
-  //   console.log(this.loginservice.currentusername);
-  //   this.router.navigate(['/main'])
-  // }
+   logOut(){
+     console.log("SHH SHAABA");
+     this.loginservice.logout() ;
+   }
 
   ngOnInit() {
 
