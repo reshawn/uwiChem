@@ -100,6 +100,7 @@ export class CalendarComponent implements OnInit {
     this.db.object(listPath).valueChanges().subscribe((courses: String) =>{ //get object from observable
       this.courses = courses; //assign string of courses to var
       console.log(this.courses);
+      if (this.courses!=null)
       this.getEvents();
     });
   }
