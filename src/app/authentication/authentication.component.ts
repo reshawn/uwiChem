@@ -9,8 +9,7 @@ import {AuthProviders} from 'angularfire2/es2015';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase';
 import {AngularFireList} from 'angularfire2/database'
-import { AngularFirestore } from 'angularfire2/firestore';
-import {GlobalsService} from 'app/globals.service';
+import {GlobalsService} from '../globals.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
