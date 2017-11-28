@@ -10,7 +10,8 @@ import { Router } from "@angular/router";
 import * as firebase from 'firebase';
 import {AngularFireList} from 'angularfire2/database'
 import { AngularFirestore } from 'angularfire2/firestore';
-import {GlobalsService} from 'app/globals.service';
+import {GlobalsService} from '../globals.service';
+import {LoginService} from '../login/login.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -22,7 +23,8 @@ export class AuthenticationComponent implements OnInit {
   token: string;
   stuCode:string;
   errorMsg:string='';
-  constructor(private db: AngularFireDatabase,public router: Router,private service:GlobalsService) { }
+  address:string;
+  constructor(private db: AngularFireDatabase,public router: Router,private service:GlobalsService,public loginservice : LoginService) { }
   ngOnInit() {
    
     this.getAuthCode('/Chemistry/Auth').subscribe(AdminCode => {
@@ -34,14 +36,18 @@ export class AuthenticationComponent implements OnInit {
    this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
     this.stuCode=stuCode[1]
     console.log(this.stuCode)
-  });
+   });
+   console.log(this.loginservice.userID);
   }
   getAuthCode(listPath): Observable<any[]> {
     return this.db.list(listPath).valueChanges();
   }
   Authenticate(){
+    this.address=this.loginservice.userID;
+    const codeStorage = this.db.object('/Chemistry/users/'+this.address);
     this.token;
-    if(this.token==this.AdminCode) {      
+    if(this.token==this.AdminCode) { 
+      codeStorage.update({ AuthState: '2'});
       console.log('They have matched the values you are a admin ggwp');
       this.service.AuthCode='2';
       this.router.navigate(['/main']);
@@ -49,10 +55,11 @@ export class AuthenticationComponent implements OnInit {
       
     }
     else if(this.token==this.stuCode){
+      codeStorage.update({ AuthState: '1'});
       console.log('we did it lads');
       this.service.AuthCode='1';
       this.router.navigate(['/main']);
-
+      
     }
     else if((this.token!=this.AdminCode)&&this.token!=this.stuCode){
       //Do error and redirect
