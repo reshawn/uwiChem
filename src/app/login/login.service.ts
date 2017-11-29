@@ -83,11 +83,11 @@ export class LoginService {
           console.log(this.authCode)
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
-            this.service.AuthCode='1';
+            this.service.AuthCode=1;
           }
           else if(this.authCode=="Admin"){
             this.router.navigate(['/main']);
-            this.service.AuthCode='2';
+            this.service.AuthCode=2;
           }
           else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
             this.router.navigate(['/authenticate']);
@@ -116,11 +116,11 @@ export class LoginService {
           console.log(this.authCode)
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
-            this.service.AuthCode='1';
+            this.service.AuthCode=1;
           }
           else if(this.authCode=="Admin"){
             this.router.navigate(['/main']);
-            this.service.AuthCode='2';
+            this.service.AuthCode=2;
           }
           else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
             this.router.navigate(['/authenticate']);
