@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'UwiChem';
-  constructor(private notificationService: NotificationService){
+  constructor(private notificationService: NotificationService, private router: Router){
     this.notificationService.getPermission();
+    this.router.navigate(['/login']);
   }
 }
