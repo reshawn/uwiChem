@@ -13,7 +13,10 @@ export class NoticesComponent implements OnInit {
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.notifications = this.notificationService.retrivePeristedNotifications();
+    this.notifications = this.notificationService.retrivePeristedNotifications(true);
+    this.notifications.forEach(notification => {
+      this.notificationService.scheduleNotification(notification);
+    });    
   }
 
   private toDisplayableTime(time: number) : string{
