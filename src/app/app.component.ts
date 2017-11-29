@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NotificationService } from './notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import { NotificationService } from './notification.service';
 })
 export class AppComponent {
   title = 'UwiChem';
-  constructor(private notificationService: NotificationService){
+  constructor(private notificationService: NotificationService, private router: Router){
     this.notificationService.getPermission();
+    this.router.navigate(['/login']);
   }
 }

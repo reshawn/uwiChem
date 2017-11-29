@@ -73,14 +73,15 @@ export class LoginService {
 
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
+        this.router.navigate(['/authenticate']);     //navigating first incase saving user email takes long eventually.
+        console.log("Email to be added: " + this.authstate.email);
+        this.saveUserEmail(this.authstate.email);
       }
     }).catch(error => {
       console.log("AHH SHIBAAA");
       console.log(error);
     });
-    this.router.navigate(['/authenticate']);     //navigating first incase saving user email takes long eventually.
-    console.log("Email to be added: " + this.authstate.email);
-    this.saveUserEmail(this.authstate.email);
+   
   }
 
   loginWithFacebook() {
@@ -88,14 +89,15 @@ export class LoginService {
       if (this.authstate) {
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
+        this.router.navigate(['/authenticate']);
+        console.log("Email to be added: " + this.authstate.email);
+        this.saveUserEmail(this.authstate.email);
       }
     }).catch(error => {
       console.log("AHH SHIBAAAI");
       console.log(error);
     });
-    this.router.navigate(['/authenticate']);
-    console.log("Email to be added: " + this.authstate.email);
-    this.saveUserEmail(this.authstate.email);
+   
   }
 
   loginWithEmail() {
@@ -104,10 +106,13 @@ export class LoginService {
 
   
       //logout mysteriously doesn't work
-  logout() : void {
+  logout(): void {
+    if(this.authstate){
       this.ngFireAuth.auth.signOut();
       this.router.navigate(['/login'])
-        //navigate if neccessary  or this.router.navigate(['/'])
-      }
+    }
+   
+    //navigate if neccessary  or this.router.navigate(['/'])
+  }
 
 }

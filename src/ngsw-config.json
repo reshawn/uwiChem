@@ -30,12 +30,23 @@
   "dataGroups": [
     {
       "name": "api-freshness",
-      "urls": ["/tasks", "/users"],
+      "urls": ["/courses"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 20,
         "maxAge": "1h",
         "timeout": "5s"
+      }
+    }, {
+      "name" : "api-performance",
+      "urls" : [
+        "/"
+      ],
+      "cacheConfig" : {
+        "maxSize" : 100,
+        "maxAge" : "4h",
+        "strategy" : "performance",
+        "timeout" : "5s"
       }
     }
   ]
