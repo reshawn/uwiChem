@@ -101,9 +101,6 @@ export class LoginService {
       console.log(error);
     });
    
-    //navigating first incase saving user email takes long eventually.
-    console.log("Email to be added: " + this.authstate.email);
-    this.saveUserEmail(this.authstate.email);
   }
 
   loginWithFacebook() {
@@ -132,9 +129,7 @@ export class LoginService {
       console.log("AHH SHIBAAAI");
       console.log(error);
     });
-    this.router.navigate(['/authenticate']);
-    console.log("Email to be added: " + this.authstate.email);
-    this.saveUserEmail(this.authstate.email);
+   
   }
 
   loginWithEmail() {
@@ -143,13 +138,15 @@ export class LoginService {
 
   
       //logout mysteriously doesn't work
-  logout() : void {
+  logout(): void {
+    if(this.authstate){
       this.ngFireAuth.auth.signOut();
       this.router.navigate(['/login'])
-        //navigate if neccessary  or this.router.navigate(['/'])
-      }
+    }
+   
   
+  }
   getAuthCode(listPath): Observable<any[]> {
-        return this.db.list(listPath).valueChanges();
-      }
+    return this.db.list(listPath).valueChanges();
+  }
 }

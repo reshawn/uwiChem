@@ -11,7 +11,6 @@ export class NotificationService {
   currentNotification = new BehaviorSubject<PersistableNotification>(null);
   supportsNotifications: boolean;
   hasNotificationPermission: boolean;
-  notifications: PersistableNotification[];
   static NOTIFICATON_EXISTS = 'notifications_exits';
   static NOTIFICATIONS = 'notifications';
   static TIME_DAY = 86400000;
@@ -19,7 +18,6 @@ export class NotificationService {
   constructor(private database: AngularFireDatabase, private auth: AngularFireAuth){
     this.supportsNotifications = "Notification" in window;
     this.handlePayload = this.handlePayload.bind(this);
-    this.notifications = this.retrivePeristedNotifications();
   }
 
   /**
@@ -92,7 +90,6 @@ export class NotificationService {
     });
     setTimeout(() => {
       notification.close();
-      //TODO: Schedule next notiifcation
     }, 10000);
   }
 
@@ -101,10 +98,9 @@ export class NotificationService {
    * @param notification Notification to persist
    */
   persistNotification(notification: PersistableNotification){
-    this.notifications.push(notification);
-    this.notifications = this.invalidateExpiredPersistedNotifications(this.notifications);
-    localStorage.setItem(NotificationService.NOTIFICATON_EXISTS, 'true');
-    localStorage.setItem(NotificationService.NOTIFICATIONS, JSON.stringify(this.notifications));
+    let notifications = this.retrivePeristedNotifications();
+    notifications.push(notification);
+    this.persistNotifications(notifications);
   }
 
   /**
@@ -115,6 +111,13 @@ export class NotificationService {
     if(!notifications || notifications.length === 0) 
       localStorage.setItem(NotificationService.NOTIFICATON_EXISTS, 'false');
     else{
+      notifications.sort((a: PersistableNotification, b: PersistableNotification) => {
+      let diffDisplayTime = a.displayTime - b.displayTime;
+        if(diffDisplayTime === 0){
+          return a.expireAt - b.expireAt;
+        }
+        return diffDisplayTime;
+      });
       localStorage.setItem(NotificationService.NOTIFICATON_EXISTS, 'true');
       localStorage.setItem(NotificationService.NOTIFICATIONS, JSON.stringify(notifications));
     }
@@ -122,14 +125,15 @@ export class NotificationService {
 
   /**
    * Retrieve the notifications persisted notifications
+   * @param persistInvalidated If true, remove the notifications that have expired from the cache
    */
-  retrivePeristedNotifications() : PersistableNotification[]{
+  retrivePeristedNotifications(persistInvalidated: boolean = false) : PersistableNotification[]{
     let notificaitonsExists = localStorage.getItem(NotificationService.NOTIFICATON_EXISTS) === 'true';
     if(!notificaitonsExists) return [];
     let persistedNotifications = JSON.parse(localStorage.getItem(NotificationService.NOTIFICATIONS));
     persistedNotifications = this.invalidateExpiredPersistedNotifications(persistedNotifications);
-    this.persistNotifications(persistedNotifications);
-    return persistedNotifications
+    if(persistInvalidated) this.persistNotifications(persistedNotifications);
+    return persistedNotifications;
   }
 
   /**
@@ -158,8 +162,15 @@ export class NotificationService {
     };
   }
 
-  createPersistableNotificationFromEvent(event) : PersistableNotification{
-    return null;
+  createPersistableNotificationFromEvent(course: string, event: CalendarEvent) : PersistableNotification{
+    return {
+      title: course,
+      text: event.title,
+      recievedAt: Date.now(),
+      displayTime: event.start.getMilliseconds(),
+      expireAt: event.end.getMilliseconds(),
+      icon: ''
+    };
   }
 
 }
@@ -189,4 +200,10 @@ export interface PersistableNotification {
   recievedAt: number;
   displayTime: number;
   expireAt: number;
+}
+
+interface CalendarEvent {
+  title: string;
+  start: Date;
+  end: Date;
 }

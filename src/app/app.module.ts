@@ -43,7 +43,7 @@ export const firebaseConfig = {
 }
 
 const appRoutes: Routes = [
-  { path: '', component:LoginComponent },
+  { path: '', component: AppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent },
   {path: 'authenticate',component:AuthenticationComponent},
@@ -79,7 +79,7 @@ const appRoutes: Routes = [
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     DemoUtilsModule,
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
+    //environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
