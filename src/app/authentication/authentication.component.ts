@@ -47,7 +47,7 @@ export class AuthenticationComponent implements OnInit {
     const codeStorage = this.db.object('/Chemistry/users/'+this.address);
     this.token;
     if(this.token==this.AdminCode) { 
-      codeStorage.update({ AuthState: '2'});
+      codeStorage.update({ AuthState: 'Admin'});
       console.log('They have matched the values you are a admin ggwp');
       this.service.AuthCode='2';
       this.router.navigate(['/main']);
@@ -55,7 +55,7 @@ export class AuthenticationComponent implements OnInit {
       
     }
     else if(this.token==this.stuCode){
-      codeStorage.update({ AuthState: '1'});
+      codeStorage.update({ AuthState: 'Student'});
       console.log('we did it lads');
       this.service.AuthCode='1';
       this.router.navigate(['/main']);
