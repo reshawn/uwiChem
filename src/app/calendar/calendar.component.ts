@@ -28,6 +28,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import {LoginService} from '../login/login.service';
 
+import {GlobalsService} from '../globals.service';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -84,13 +86,23 @@ export class CalendarComponent implements OnInit {
   
   events: CalendarEvent[] = [
   ];
+  newEventCourses: string[] = [];
+  eventCourses: string[] = [];
 
   activeDayIsOpen: boolean = true;
   userID: String ;
+  isAdmin: boolean = false;
 
 
-  constructor(public loginservice : LoginService, private modal: NgbModal, private db: AngularFireDatabase) {
+  constructor(
+    public loginservice : LoginService,
+    private modal: NgbModal, 
+    private db: AngularFireDatabase,
+    private gs: GlobalsService,
+  ) {
     this.userID = loginservice.userID;
+    if (gs.AuthCode === 2) this.isAdmin = true;
+    console.log(gs.AuthCode);
    }
 
   ngOnInit() {
@@ -101,21 +113,25 @@ export class CalendarComponent implements OnInit {
       this.courses = courses; //assign string of courses to var
       console.log(this.courses);
       if (this.courses!=null)
-      this.getEvents();
+        this.getEvents();
     });
   }
   getEvents():void {
-    var courseA:string[] = this.courses.split(" ");
-    courseA.forEach(element => {
+    this.eventCourses = this.courses.split(" ");
+    this.eventCourses.forEach(element => {
+      var once = true;
       this.db.object('/Chemistry/courses/'+element+'/events').valueChanges().subscribe((e: Object) =>{
         if (e!=null){
+          this.events = []; this.newEventCourses = [];
           var events: any = Object.values(e);
+          console.log("coming in", e);
           events.forEach(event => {
-            this.events.push({title: element + ': '+ event.title,
+            this.events.push({
+            title: element + ' : '+ event.title,
             start: parse(event.start),
             end: parse(event.end),
             color: {
-              primary: event.color,
+              primary: event.colour,
               secondary: '#FAE3E3'
             },
             draggable: true,
@@ -124,6 +140,7 @@ export class CalendarComponent implements OnInit {
               afterEnd: true
             }
           });
+            this.newEventCourses.push(element);
             this.refresh.next(); //trigger next for all observers to get new value (update calendar to new event)
             
           })
@@ -174,12 +191,63 @@ export class CalendarComponent implements OnInit {
       resizable: {
         beforeStart: true,
         afterEnd: true
-      }
+      },
     });
+    if (this.eventCourses[0]!=null)
+      this.newEventCourses.push(this.eventCourses[0]);
+    else this.newEventCourses.push("");
     this.refresh.next();
   }
 
+  saveEvents():void {
+    //Because the old events are retrieved and displayed, they should be currently in the array
+    //and can be edited as well, therefore the old events in the live database can be removed
+    //and this array can be added, reflecting the changes of the user
+    
+    
+    var evs = [];
+    // console.log(coursesToClear,this.events,this.newEventCourses);
 
+    this.eventCourses.forEach((c)=>{
+      this.events.forEach((event,index) =>{
+        if (c===this.newEventCourses[index]){
+          var realTitle = event.title.split(" : ");
+          var desc;
+          if (realTitle.length===1)
+            desc = event.title;
+          else
+            desc = realTitle.slice(1,realTitle.length).join(" : ");
+          console.log("colo:",event.color.primary);
+          console.log("desc",realTitle);
+          var e = {
+            title:desc,
+            start:event.start,
+            colour:event.color.primary,
+            end:event.end,
+          };
+          evs.push(e);
+          // this.events.splice(index,1);
+          // this.newEventCourses.splice(index,1);
+          // this.refresh.next();
+        }
+      });
+      var child = {
+        events:evs
+      };
+      evs = [];
+      this.events = []; this.newEventCourses = [];
+      this.db.object('/Chemistry/courses/'+c+'/events').remove().then(_ =>{
+        var once = true;
+        if (once){
+          once = false;
+          
+          this.db.object('/Chemistry/courses/'+c).update(child).then(_=>console.log("updated"));
+        }
+        
+        
+      }).catch(err => console.log(err, 'Failed to reset events'));
+    })
   
+  }
 
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AngularFireDatabaseModule, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import {GlobalsService} from '../globals.service';
 
 @Injectable()
 export class LoginService {
@@ -13,7 +14,9 @@ export class LoginService {
   addUserRef: AngularFireObject<any>;
   userEmail: String;
   userName: String;
-  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase) {
+  authCode:string;
+  addStupidState:AngularFireObject<any>;
+  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase,private service:GlobalsService) {
 
     ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
       this.authstate = auth;
@@ -25,6 +28,7 @@ export class LoginService {
   saveUserEmail(emailAddress): void {
     var splitMail: String[] = emailAddress.split("@");
     var mail = splitMail[0];
+
     this.db.object('Chemistry/users/' + this.authstate.uid).valueChanges().subscribe(userSearch => {
       if (userSearch == null) {
         this.addUserRef = this.db.object('Chemistry/users/' + this.authstate.uid);
@@ -68,6 +72,7 @@ export class LoginService {
   //that fixed the weird problem with routerlinks and signins
   
   loginWithGoogle() {
+    
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
 
@@ -112,7 +117,7 @@ export class LoginService {
       this.router.navigate(['/login'])
     }
    
-    //navigate if neccessary  or this.router.navigate(['/'])
+  
   }
 
 }
