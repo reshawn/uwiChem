@@ -43,7 +43,7 @@ export const firebaseConfig = {
 }
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent },
   {path: 'authenticate',component:AuthenticationComponent},
