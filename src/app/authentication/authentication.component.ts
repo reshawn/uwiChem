@@ -31,8 +31,6 @@ export class AuthenticationComponent implements OnInit {
       this.AdminCode=AdminCode[0]
       console.log(this.AdminCode)
     });
-   this.service.AuthCode='1';
-   console.log(this.service.AuthCode);
    this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
     this.stuCode=stuCode[1]
     console.log(this.stuCode)
