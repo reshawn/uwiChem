@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import * as firebase from 'firebase';
 import {AngularFireList} from 'angularfire2/database'
 import { AngularFirestore } from 'angularfire2/firestore';
-import {GlobalsService} from 'app/globals.service';
+import {GlobalsService} from '../globals.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -29,7 +29,7 @@ export class AuthenticationComponent implements OnInit {
       this.AdminCode=AdminCode[0]
       console.log(this.AdminCode)
     });
-   this.service.AuthCode='1';
+   this.service.AuthCode=0;
    console.log(this.service.AuthCode);
    this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
     this.stuCode=stuCode[1]
@@ -43,14 +43,14 @@ export class AuthenticationComponent implements OnInit {
     this.token;
     if(this.token==this.AdminCode) {      
       console.log('They have matched the values you are a admin ggwp');
-      this.service.AuthCode='2';
+      this.service.AuthCode=2;
       this.router.navigate(['/main']);
       
       
     }
     else if(this.token==this.stuCode){
       console.log('we did it lads');
-      this.service.AuthCode='1';
+      this.service.AuthCode=1;
       this.router.navigate(['/main']);
 
     }

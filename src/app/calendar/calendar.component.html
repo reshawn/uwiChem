@@ -110,4 +110,82 @@
 <!-- page gets weirdly truncated without this -->
 <div class="pull-right"></div>
 
+<div *ngIf="isAdmin" id="adminThings">
+  <h3>
+    Manage events&emsp;&emsp;
+    <button
+      class="btn btn-primary"
+      (click)="addEvent()">
+      Add new
+    </button>&emsp;&emsp;&emsp;
+    <button
+      class="btn btn-primary "
+      (click)="saveEvents()">
+      Save
+  </button>
+    <div class="clearfix "></div>
+  </h3>
+
+  <table class="table table-bordered">
+
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Course</th>
+        <th>Colour</th>
+        <th>Starts at</th>
+        <th>Ends at</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of events; let index = index">
+        <td>
+          <textarea
+            name="desc"
+            rows="5"
+            cols="30"
+            class="form-control"
+            [(ngModel)]="event.title"
+            (keyup)="refresh.next()"></textarea>
+        </td>
+        <td>
+          <select class="form-control" [(ngModel)]="newEventCourses[index]">
+            <option *ngFor="let c of eventCourses" [value]="c">{{c}}</option>
+          </select>
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.primary"
+            (change)="refresh.next()">
+        </td>
+        <td>
+          <mwl-demo-utils-date-time-picker
+            [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()"
+            placeholder="Not set">
+          </mwl-demo-utils-date-time-picker>
+        </td>
+        <td>
+          <mwl-demo-utils-date-time-picker
+            [(ngModel)]="event.end"
+            (ngModelChange)="refresh.next()"
+            placeholder="Not set">
+          </mwl-demo-utils-date-time-picker>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="events.splice(index, 1); newEventCourses.splice(index,1); refresh.next()">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
 
