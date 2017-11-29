@@ -75,26 +75,8 @@ export class LoginService {
     
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
-
-        console.log(this.authstate.displayName);
-        console.log(this.authstate.email);
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-            console.log("Testone");
-          }
-        });
-        
+        this.router.navigate(['/authenticate']);     //navigating first incase saving user email takes long eventually.
+        this.saveUserEmail(this.authstate.email);
       }
     }).catch(error => {
       console.log("AHH SHIBAAA");
@@ -106,47 +88,22 @@ export class LoginService {
   loginWithFacebook() {
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(result => {
       if (this.authstate) {
-        console.log(this.authstate.displayName);
-        console.log(this.authstate.email);
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-            console.log("Testone");
-          }
-        });
+        this.router.navigate(['/authenticate']);
+        this.saveUserEmail(this.authstate.email);
       }
     }).catch(error => {
-      console.log("AHH SHIBAAAI");
+      console.log("AHH SHIBAAA");
       console.log(error);
     });
    
   }
 
-  loginWithEmail() {
-    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
-  }
-
-  
-      //logout mysteriously doesn't work
   logout(): void {
     if(this.authstate){
       this.ngFireAuth.auth.signOut();
       this.router.navigate(['/login'])
     }
-   
   
   }
-  getAuthCode(listPath): Observable<any[]> {
-    return this.db.list(listPath).valueChanges();
-  }
+
 }
