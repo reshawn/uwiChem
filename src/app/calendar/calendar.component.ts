@@ -1,8 +1,10 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
 import {
   startOfDay,
@@ -21,7 +23,7 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
-
+import { LoginService } from '../login/login.service';
 // import { AngularFireDatabase } from 'angularfire2/database';
 // import {LoginService} from '../login/login.service';
 
@@ -45,11 +47,11 @@ const colors: any = {
 
 @Component({
   selector: 'app-calendar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
   
     view: string = 'month';
@@ -60,7 +62,9 @@ export class CalendarComponent {
       action: string;
       event: CalendarEvent;
     };
-  
+    ngOnInit(){
+      
+    }
     actions: CalendarEventAction[] = [
       {
         label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -115,7 +119,7 @@ export class CalendarComponent {
   
     activeDayIsOpen: boolean = true;
   
-    constructor(private modal: NgbModal) {}
+    constructor(private modal: NgbModal, private ls:LoginService) {}
   
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
       if (isSameMonth(date, this.viewDate)) {

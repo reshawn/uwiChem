@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
 import {MatTabGroup, MatTab} from '@angular/material';
-import {GlobalsService} from 'app/globals.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -36,10 +35,9 @@ export class MainComponent implements OnInit {
   }
 
 
-  constructor(private service:GlobalsService) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log(this.service.AuthCode);
     
   }
 

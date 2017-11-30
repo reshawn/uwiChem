@@ -12,7 +12,6 @@ import { MatTabsModule, MatGridListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import {GlobalsService} from './globals.service';
 
 import { AppComponent } from './app.component';
@@ -29,7 +28,6 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoUtilsModule } from '../demo-utils/module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CoursesComponent } from './courses/courses.component';
-import { NoticesComponent } from './notices/notices.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
@@ -44,7 +42,6 @@ const appRoutes: Routes = [
   { path: '', component: AppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent },
-  {path: 'authenticate',component:AuthenticationComponent},
 
 ];
 
@@ -53,10 +50,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     MainComponent,
-    AuthenticationComponent,
     CalendarComponent,
     CoursesComponent,
-    NoticesComponent
   ],
   imports: [
     AngularFireDatabaseModule,

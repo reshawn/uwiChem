@@ -4,42 +4,51 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AngularFireDatabaseModule, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-
+import { Subscribable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/first';
+import {OnDestroy} from '@angular/core';
 @Injectable()
-export class LoginService {
+export class LoginService implements OnDestroy{
 
   authstate: any;
   data: any;
   addUserRef: AngularFireObject<any>;
   userEmail: String;
   userName: String;
+  sub:Subscription;
   constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase) {
 
-    ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
+    this.sub = ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
       this.authstate = auth;
+      
     })
 
   }
-
-
-  saveUserEmail(emailAddress): void {
-    var splitMail: String[] = emailAddress.split("@");
-    var mail = splitMail[0];
-    this.db.object('Chemistry/users/' + this.authstate.uid).valueChanges().subscribe(userSearch => {
-      if (userSearch == null) {
-        this.addUserRef = this.db.object('Chemistry/users/' + this.authstate.uid);
-        this.addUserRef.set({
-          name: this.authstate.displayName,
-          email: this.authstate.email
-        });
-      }
-
-    });
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
+
+
+  // saveUserEmail(emailAddress): void {
+  //   var splitMail: String[] = emailAddress.split("@");
+  //   var mail = splitMail[0];
+  //   this.db.object('Chemistry/users/' + this.authstate.uid).valueChanges().subscribe(userSearch => {
+  //     if (userSearch == null) {
+  //       this.addUserRef = this.db.object('Chemistry/users/' + this.authstate.uid);
+  //       this.addUserRef.set({
+  //         name: this.authstate.displayName,
+  //         email: this.authstate.email
+  //       });
+  //     }
+
+  //   });
+  // }
 
   get currentusername(): any {       //getter to call in other components to manipulate user data
     if (this.authstate) {
       return this.authstate.displayName;
+
     }
 
   }
@@ -68,22 +77,28 @@ export class LoginService {
   //that fixed the weird problem with routerlinks and signins
   
   loginWithGoogle() {
-    this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
-      if (this.authstate) {
-
-        console.log(this.authstate.displayName);
-        console.log(this.authstate.email);
-      }
-    }).catch(error => {
-      console.log("AHH SHIBAAA");
-      console.log(error);
-    });
+    this.ngFireAuth.auth.setPersistence(firebase.auth.Auth.Persistence.NONE).then(_=>{
+      this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
+        if (this.authstate) {
+  
+          console.log(this.authstate.displayName);
+          console.log(this.authstate.email);
+          // this.sub.unsubscribe();
+          this.router.navigate(['/main'])
+        }
+      }).catch(error => {
+        console.log("AHH SHIBAAA");
+        console.log(error);
+      });
+    })
+    
    
   }
 
   loginWithFacebook() {
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(result => {
       if (this.authstate) {
+        this.router.navigate(['/main'])
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
       }

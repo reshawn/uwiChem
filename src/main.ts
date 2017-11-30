@@ -10,13 +10,4 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-<<<<<<< HEAD
-   .then(() => {
-     if ('serviceWorker' in navigator) {
-       navigator.serviceWorker.register('/ngsw-worker.js');
-       console.log("sw is registerd now");
-     }
-   })
-=======
->>>>>>> parent of 52400ae... Merge branch 'master' of https://github.com/reshawn/uwiChem
   .catch(err => console.log(err));

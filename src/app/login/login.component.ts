@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   signInFacebook() {
-    this.loginservice.loginWithFacebook();
+    this.router.navigate(['/main'])
   }
 
 
