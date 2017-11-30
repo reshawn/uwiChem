@@ -9,6 +9,8 @@ import {AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatTabsModule, MatGridListModule } from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
@@ -32,7 +34,7 @@ import { NotificationService } from './notification.service';
 import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'authenticate', component: AuthenticationComponent, canActivate: [AuthGuard] },
@@ -67,6 +69,8 @@ const appRoutes: Routes = [
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     DemoUtilsModule,
+    MatButtonModule,
+    MatIconModule,
     //environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
   ],
   providers: [{ 

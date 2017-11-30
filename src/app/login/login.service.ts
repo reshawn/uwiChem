@@ -45,7 +45,8 @@ export class LoginService {
     if (this.authstate) {
       return this.authstate.displayName;
     }
-
+    
+    
   }
   
   get userID(): any {

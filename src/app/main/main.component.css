@@ -11,3 +11,13 @@
 }
 
 .content{ height: 500px;}
+
+.glyphicon.glyphicon-log-out {
+    font-size: 40px;
+}
+
+#logoutbutton{
+    font-size : 20px;
+    size : 25px;
+
+}
