@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
 import {MatTabGroup, MatTab} from '@angular/material';
-import {GlobalsService} from '../globals.service';
-import { LoginService } from '../login/login.service';
+import {GlobalsService} from 'app/globals.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -14,8 +13,6 @@ export class MainComponent implements OnInit {
   @ViewChildren(MatTab) tabs;
   tab_num = 2;
   selected = 0;
-  email : any;
-  authstateName : any;
   // constant for swipe action: left or right
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
@@ -39,17 +36,11 @@ export class MainComponent implements OnInit {
   }
 
 
-  constructor(private service:GlobalsService, private loginservice : LoginService) {
-     this.authstateName = loginservice.currentusername;
-     this.email = loginservice.currentEmail;
-   }
+  constructor(private service:GlobalsService) { }
 
   ngOnInit() {
     console.log(this.service.AuthCode);
     
   }
-  logOut(){
-    console.log("SHH SHAABA");
-    this.loginservice.logout() ;
-  }
+
 }

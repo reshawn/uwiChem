@@ -13,12 +13,6 @@
   <!-- <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet"> -->
   <!-- <link href="app/custTheme1.scss" rel="stylesheet"> not needed because scss file was added in cli-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- pwa meta tags -->
-  <link rel = "icon" type = "image/x-icon" href = "/assets/icon-192x192.png">
-  <link rel = "manifest" href= "/manifest.json">
-  <meta name = "mobile-web-app-capable" content="yes">
-  <meta name = "theme-color" content = "#1b2737">
-
 </head>
 <style>
     .splash {
@@ -44,13 +38,8 @@
 <body>
 
   <app-root></app-root>
-
-  <div class="splash" id="content">
-      <img src="/assets/icon-512x512.png" alt="Angular5 PWA logo">
-      <h1>UWIchem</h1>
-  </div> 
   <script>
-    if ('serviceWorker' in navigator) {
+    if('serviceWorker' in navigator){
       navigator.serviceWorker.register('firebase-messaging-sw.js');
       
       //navigator.serviceWorker.register('ngsw-worker.js', {scope: '/app/'}).then(function(registration){
@@ -59,8 +48,5 @@
       //});
     }
   </script>
-  <noscript>
-    <p>Sorry, Javascript must be enabled to use this app :(</p>
-  </noscript>
 </body>
 </html>

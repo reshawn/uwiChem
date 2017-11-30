@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AngularFireDatabaseModule, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import {GlobalsService} from '../globals.service';
 
 @Injectable()
 export class LoginService {
@@ -14,9 +13,7 @@ export class LoginService {
   addUserRef: AngularFireObject<any>;
   userEmail: String;
   userName: String;
-  authCode:string;
-  addStupidState:AngularFireObject<any>;
-  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase,private service:GlobalsService) {
+  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase) {
 
     ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
       this.authstate = auth;
@@ -28,7 +25,6 @@ export class LoginService {
   saveUserEmail(emailAddress): void {
     var splitMail: String[] = emailAddress.split("@");
     var mail = splitMail[0];
-
     this.db.object('Chemistry/users/' + this.authstate.uid).valueChanges().subscribe(userSearch => {
       if (userSearch == null) {
         this.addUserRef = this.db.object('Chemistry/users/' + this.authstate.uid);
@@ -72,29 +68,11 @@ export class LoginService {
   //that fixed the weird problem with routerlinks and signins
   
   loginWithGoogle() {
-    
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
 
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-            console.log("Testone");
-          }
-        });
-        
       }
     }).catch(error => {
       console.log("AHH SHIBAAA");
@@ -108,22 +86,6 @@ export class LoginService {
       if (this.authstate) {
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-            console.log("Testone");
-          }
-        });
       }
     }).catch(error => {
       console.log("AHH SHIBAAAI");
@@ -142,11 +104,8 @@ export class LoginService {
     if(this.authstate){
       this.ngFireAuth.auth.signOut();
       this.router.navigate(['/login'])
+        //navigate if neccessary  or this.router.navigate(['/'])
+      }
     }
-   
-  
-  }
-  getAuthCode(listPath): Observable<any[]> {
-    return this.db.list(listPath).valueChanges();
-  }
+
 }

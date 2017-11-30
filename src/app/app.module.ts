@@ -31,8 +31,6 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NoticesComponent } from './notices/notices.component';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
-
 export const firebaseConfig = {
   apiKey: "AIzaSyARJaQ6IU3ScMvwNA5PIo3gVJl_U45M7Vo",
   authDomain: "uwichem.firebaseapp.com",
@@ -79,7 +77,6 @@ const appRoutes: Routes = [
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     DemoUtilsModule,
-    //environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
