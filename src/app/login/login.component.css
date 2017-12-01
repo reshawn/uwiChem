@@ -95,3 +95,16 @@
   .fa fa{
     font-size: 0.5em;
   }
+  @media only screen and (max-width: 350px) {
+    /* For mobile phones: */
+    [class*="container"] {
+        width: 100%;
+        height: 100%;
+        padding-left: 0px;
+        }
+    [class*="jumbotron"]{
+       font-size: 100%;
+       width: 100%;
+    }
+    
+}
