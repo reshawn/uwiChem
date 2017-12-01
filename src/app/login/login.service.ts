@@ -76,6 +76,7 @@ export class LoginService {
     
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
+
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
@@ -109,8 +110,8 @@ export class LoginService {
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
+          this.authCode=Code[0];
+          console.log(this.authCode);
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
             this.service.AuthCode=1;

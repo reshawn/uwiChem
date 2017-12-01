@@ -3,8 +3,8 @@
   
   min-width: 100%;
   min-height: 100%;
-  background-image: url("/assets/bg_login_png.png");
-  background-size: 100%;
+  background-image: url("/assets/bg_login_png.png") ;
+  background-size: cover;
 }
 /* .title{
     
