@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'UwiChem';
+  title = 'UWIchem';
   constructor(private notificationService: NotificationService){
     this.notificationService.getPermission();
   }

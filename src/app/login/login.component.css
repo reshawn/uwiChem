@@ -1,13 +1,19 @@
 #bodyDiv{
   position: fixed;
+  
   min-width: 100%;
   min-height: 100%;
-  background-image: url("/assets/bg_login.jpg");
+  background-image: url("/assets/bg_login_png.png");
+  background-size: 100%;
 }
+/* .title{
+    
+  font-family: 'Quicksand', sans-serif;
+} */
 
 
 #loginForm{
-  margin-top:30%;
+  margin-top:10%;
   z-index: -10;
   padding-right: 10em;
   background: rgb(204, 204, 204);
@@ -17,16 +23,15 @@
 
 }
 
-#inner{
-  filter:blur(0px);  
-  z-index: 99999999;
-  
-
+.loginbtn{
+    padding-top: 2em;
 }
+
 
   a.btn-social,
   .btn-social
   {
+    
       border-radius: 50%;
       color: #ffffff !important;
       display: inline-block;
@@ -65,30 +70,6 @@
       transform: scale(1.3);
       webkit-transform: scale(1.3);
   }
-  .btn-social.btn-xs
-  {
-      font-size: 9px;
-      height: 24px;
-      line-height: 13px;
-      margin: 6px 2px;
-      width: 24px;
-  }
-  .btn-social.btn-sm
-  {
-      font-size: 13px;
-      height: 36px;
-      line-height: 18px;
-      margin: 6px 2px;
-      width: 36px;
-  }
-  .btn-social.btn-lg
-  {
-      font-size: 22px;
-      height: 72px;
-      line-height: 40px;
-      margin: 10px 6px;
-      width: 72px;
-  }
 
   .btn-google-plus
   {
@@ -98,6 +79,7 @@
   .btn-google-plus:hover
   {
       background-color: #e47365;
+      cursor:pointer;
   }
 
   .btn-facebook
@@ -107,8 +89,9 @@
   .btn-facebook:hover
   {
       background-color: #4c70ba;
+      cursor:pointer;
   }
 
   .fa fa{
-    font-size: 10em;
+    font-size: 0.5em;
   }

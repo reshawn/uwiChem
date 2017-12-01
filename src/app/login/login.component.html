@@ -4,20 +4,26 @@
 <div class="container">
     <div id = "loginForm" class="jumbotron">
       <div id="inner"></div>
-        <h1 class="display-3 text-center">UWI<strong>chem</strong></h1>
+        <p class="h1 display-3 text-center title">UWI<strong>chem</strong></p>
         <hr class="my-4">
-        <div class="input-group input-group-lg">
+        <div class="input-group">
             <span style = "width:8rem;"class="input-group-addon text-center" id="sizing-addon1"> <strong>Email </strong> </span>
             <input type="email" class="form-control" placeholder="Email Address" aria-label="email" aria-describedby="sizing-addon1">
         </div>
         <br>
-        <div class="input-group input-group-lg">
+        <div class="input-group">
             <span style = "width:8rem;"class="input-group-addon text-center" id="sizing-addon2"> <strong>Password</strong> </span>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
+        <div class = "loginbtn">
+            <button class="btn ">Login</button>&emsp;
+            <a  href="">Create Account</a>
+            &emsp;
+            <a  href="">Forgot your password?</a>
+        </div>
         <div class = "text-center">
-            <a (click) = "signInGoogle()" class="btn-social btn-google-plus"><i class="fa fa-google-plus fa-3x"></i></a>
-            <a (click)= "signInFacebook()" class="btn-social btn-facebook"><i class="fa fa-facebook fa-3x"></i></a>
+            <a (click) = "signInGoogle()" class="btn-social btn-google-plus"><i class="fa fa-google-plus fa-2x"></i></a>
+            <a (click)= "signInFacebook()" class="btn-social btn-facebook"><i class="fa fa-facebook fa-2x"></i></a>
         </div>
       </div>     
 </div>
