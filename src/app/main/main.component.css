@@ -1,16 +1,79 @@
 
 .mat-tab-label{
-    background-color: #2196F3 !important;
+    background-color: #233446 !important;
     color: #FFFFFF !important;
     opacity: 1 !important;
     min-width: 10px !important;
+    font-family: 'Pangolin', cursive;
+    font-size: 1em;
+}
+.mat-ink-bar{
+    background-color: #1DA1F3 !important;
 }
 .mat-tab-label-active{
-    background-color: #FFFFFF !important;
-    color: black !important;
+    background-color: #233446 !important;
+    color: white !important;
 }
 
-/* .content{ height: 500px;} */
+.cal-month-view .cal-day-cell.cal-today{
+    background-color: #233446 !important ;
+}
+
+.cal-month-view .cal-cell-row:hover {
+    background-color: #151e29 !important; 
+}
+.cal-month-view .cal-cell-row .cal-cell:hover{
+    background-color: #233446 !important ;
+}
+.cal-month-view .cal-day-cell.cal-weekend .cal-day-number{
+    color: #C39E09 !important ;
+}
+.cal-month-view .cal-cell-row .cal-cell:hover,
+.cal-month-view .cal-cell.cal-has-events.cal-open {
+  background-color: #233446; }
+
+.btn-link{
+    border:none !important;
+}
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+    box-shadow:none !important;
+}
+
+
+
+.cal-week-view .cal-header.cal-today{
+    background-color: #233446 !important ;
+}
+
+.cal-week-view .cal-day-headers .cal-header:hover,
+.cal-week-view .cal-day-headers .cal-drag-over {
+  background-color: #233446 !important; 
+}
+.cal-event{
+    background-color: #9FFED6 !important;
+    color: black;
+}
+.cal-week-view .cal-header.cal-weekend span{
+    color: #C39E09;
+    opacity: 0.7;
+}
+
+
+
+.cal-day-view .cal-hour:nth-child(odd){
+    background-color: #151e29 !important;
+}
+.cal-day-view .cal-hour-segment:hover,
+.cal-day-view .cal-drag-over .cal-hour-segment {
+  background-color: #233446; }
+
+#pseudobody{
+    background-color: #151e29;
+    min-height: 100%;
+    width:100%;
+    color: white;
+    position:absolute;
+}
 
 .glyphicon.glyphicon-log-out {
     font-size: 15px;
