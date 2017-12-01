@@ -110,8 +110,8 @@ export class LoginService {
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
+          this.authCode=Code[0];
+          console.log(this.authCode);
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
             this.service.AuthCode=1;
@@ -137,8 +137,7 @@ export class LoginService {
     this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
   }
 
-  
-      //logout mysteriously doesn't work
+
   logout(): void {
     if(this.authstate){
       this.ngFireAuth.auth.signOut();

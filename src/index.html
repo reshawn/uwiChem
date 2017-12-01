@@ -21,49 +21,24 @@
   <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
   
+  </head>
   
-</head>
-<style>
-    .splash {
-      opacity: 0;
-      position: fixed;
-      height: 100%;
-      width: 100%;
-      color: #272c33;
-      padding-top: 25vh;
-      text-align: center;
-      z-index: -1;
-      font-family: monospace;
-      }
-      app-root:empty + .splash {
-        opacity: 1;
-        z-index: 100;
-      }
-      .splash h1 {
-            margin-bottom: 50px;
-      };
-    </style>
-
-<body>
-
-  <app-root></app-root>
-
-  <div class="splash" id="content">
-      <img src="/assets/icon-152x152.png" alt="Angular5 PWA logo">
-      <h1>UWIchem</h1>
-  </div> 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('firebase-messaging-sw.js');
-      
-      //navigator.serviceWorker.register('ngsw-worker.js', {scope: '/app/'}).then(function(registration){
-       // console.log("Registerd sw");
+  <body>
+  
+    <app-root></app-root>
+  
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('firebase-messaging-sw.js');
+        //navigator.serviceWorker.register('ngsw-worker.js', {scope: '/app/'}).then(function(registration){
+        // console.log("Registerd sw");
         //console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      //});
-    }
-  </script>
-  <noscript>
-    <p>Sorry, Javascript must be enabled to use this app :(</p>
-  </noscript>
-</body>
-</html>
+        //});
+      }
+    </script>
+    <noscript>
+      <p>Sorry, Javascript must be enabled to use this app :(</p>
+    </noscript>
+  </body>
+  
+  </html>
