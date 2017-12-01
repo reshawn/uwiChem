@@ -76,7 +76,6 @@ export class LoginService {
     
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
-
         console.log(this.authstate.displayName);
         console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
@@ -137,8 +136,7 @@ export class LoginService {
     this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
   }
 
-  
-      //logout mysteriously doesn't work
+
   logout(): void {
     if(this.authstate){
       this.ngFireAuth.auth.signOut();
