@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Uwichem</title>
+  <title>UWIchem</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,15 +18,57 @@
   <link rel = "manifest" href= "/manifest.json">
   <meta name = "mobile-web-app-capable" content="yes">
   <meta name = "theme-color" content = "#1b2737">
-  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css?family=Quicksand:400,400italic,700" rel="stylesheet">
   
   </head>
+  <style>
   
+  html.fa-events-icons-loading .brand{
+    visibility: hidden;
+  }
+  
+ 
+  html.fa-events-icons-loading .fa-few ::before{
+    content: "\00a0";
+  }
+  
+
+  body{
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+  .splash {
+  opacity: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  color: #272c33;
+  padding-top: 25vh;
+  text-align: center;
+  z-index: -1;
+  font-family: monospace;
+  }
+  app-root:empty + .splash {
+    opacity: 1;
+    z-index: 100;
+    background-color: 	#1F2F50;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  .splash h1 {
+        margin-bottom: 50px;
+        color:white;
+  };
+  
+  
+  </style>
   <body>
-  
+
     <app-root></app-root>
-  
+    <div class="splash" id="content">
+      <img src="/assets/splash_256x256.png" alt="Angular5 PWA logo">
+      <h1>UWIchem</h1>
+    </div> 
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('firebase-messaging-sw.js');
