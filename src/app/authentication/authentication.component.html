@@ -1,19 +1,23 @@
-<!DOCTYPE html>
- <div class="auth-page">
-  <div class="container">
-
-  <div class="form">
-    <form class="auth-form">
-      <h4>{{errorMsg}}</h4>
-      <input  input  [(ngModel)]='token' placeholder="Enter the token"[ngModelOptions]="{standalone: true}"/>
-      <button (click)="Authenticate()">Authenticate</button>
-
-      <!-- add text to tell ppl they get enter wrong code -->
-     </form>
-   </div>
- </div>
- </div> 
 
 
-
+ <div id ="bodyDiv">
   
+  
+  <div class="container">
+      <div id = "authForm" class="jumbotron">
+        <div id="inner"></div>
+          <p class="h1 display-3 text-center title">UWI<strong>chem</strong></p>
+          <hr class="my-4">
+          <h4 class="text-danger">{{errorMsg}}</h4>
+          <div class="input-group">
+              <span style = "width:8rem;"class="input-group-addon text-center" id="sizing-addon1"> <strong>Code </strong> </span>
+              <input (keyup.enter)="Authenticate()" [(ngModel)]='token' [ngModelOptions]="{standalone: true}" type="password" class="form-control" placeholder="Authentication Code" aria-label="password" aria-describedby="sizing-addon1">
+          </div>
+          <br>
+          <button class="authbtn btn btn-primary" (click)="Authenticate()">Authenticate</button>
+
+
+        </div>     
+  </div>
+  
+  </div>

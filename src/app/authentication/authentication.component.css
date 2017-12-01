@@ -1,58 +1,27 @@
-.auth-page{
-   
+#bodyDiv{
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url("/assets/bg_auth.png");
+  background-size: 100%;
+}
+/* .title{
     
-    padding: 25px 50px 750px 100px;
-    background-color: rgb(250, 249, 249);
-    text-align: center;
-    
-  }
+  font-family: 'Quicksand', sans-serif;
+} */
 
-.auth-form {
-    border: 10px solid white;
-    position: relative;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.993);
-    max-width: 360px;
-    margin: 0 auto 100px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    height: 250px;
-  }
-  .form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
-  .form button {
-    font-family: "Times New Roman";
-    text-transform: uppercase;
-    outline: 0;
-    background: rgb(255, 255, 255);
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer;
-  }
-  .form button:hover,.form button:active,.form button:focus {
-    background: rgb(185, 8, 8);
-  }
-  .form .message {
-    margin: 15px 0 0;
-    color: #070101;
-    font-size: 12px;
-  }
 
-  h1{
-    color: green;
-  }
+#authForm{
+  margin-top:10%;
+  z-index: -10;
+  padding-right: 10em;
+  background: rgb(204, 204, 204);
+  background: rgba(204, 204, 204, 0.5);
+  /* filter:blur(1.5px); */
+  
+
+}
+
+.authbtn{
+    margin-top: 2em;
+}
