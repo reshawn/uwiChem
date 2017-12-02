@@ -4,6 +4,7 @@ import { AngularFireAuth }     from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import 'rxjs/add/operator/take';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { CalendarEvent } from 'angular-calendar';
 
 @Injectable()
 export class NotificationService {
@@ -207,10 +208,4 @@ export interface PersistableNotification {
   recievedAt: number;
   displayTime: number;
   expireAt: number;
-}
-
-interface CalendarEvent {
-  title: string;
-  start: Date;
-  end?: Date;
 }
