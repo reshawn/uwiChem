@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class NotificationService {
   messaging = firebase.messaging();
-  currentNotification = new BehaviorSubject<PersistableNotification>(null);
+  currentNotification: BehaviorSubject<PersistableNotification>;
   supportsNotifications: boolean;
   hasNotificationPermission: boolean;
   static NOTIFICATON_EXISTS = 'notifications_exits';
@@ -18,6 +18,7 @@ export class NotificationService {
   constructor(private database: AngularFireDatabase, private auth: AngularFireAuth){
     this.supportsNotifications = "Notification" in window;
     this.handlePayload = this.handlePayload.bind(this);
+    this.currentNotification = new BehaviorSubject<PersistableNotification>(null);
   }
 
   /**
@@ -58,9 +59,9 @@ export class NotificationService {
    */
   private handlePayload(payload: FCMPayload){
     let notification = this.createPersistableNotificationFromPayload(payload);
-    this.currentNotification.next(notification);
     this.scheduleNotification(notification);
     this.persistNotification(notification);
+    this.currentNotification.next(notification);
   }
 
   /**
@@ -173,6 +174,12 @@ export class NotificationService {
     };
   }
 
+  handleNotificationFromEvent(course: string, event: CalendarEvent){
+    let notification = this.createPersistableNotificationFromEvent(course, event);
+    this.persistNotification(notification);
+    this.scheduleNotification(notification);
+    this.currentNotification.next(notification);
+  }
 }
 
 interface FCMNotificationBody {
