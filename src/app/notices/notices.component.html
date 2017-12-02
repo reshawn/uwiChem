@@ -1,4 +1,4 @@
-<div *ngFor="let n of notifications">
+<div *ngFor="let n of notifications | async">
   <p>{{n.title}}</p>
   <p>{{n.text}}</p>
   <p>{{toDisplayableTime(n.displayTime)}}</p>
