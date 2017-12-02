@@ -1,0 +1,110 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/inline.894a7501669eea727ad4.bundle.js",
+        "/main.a3b329607e8ffd11de3c.bundle.js",
+        "/polyfills.e6475d2787bb3154d59c.bundle.js",
+        "/styles.aecabc7085d572c9c9e6.bundle.css"
+      ],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/css\\?family=Material\\+Icons"
+      ]
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/bg_auth.png",
+        "/assets/bg_login.jpg",
+        "/assets/bg_login_png.png",
+        "/assets/icon-128x128.png",
+        "/assets/icon-144x144.png",
+        "/assets/icon-152x152.png",
+        "/assets/icon-192x192.png",
+        "/assets/icon-384x384.png",
+        "/assets/icon-512x512.png",
+        "/assets/icon-72x72.png",
+        "/assets/icon-96x96.png",
+        "/assets/splash.png",
+        "/assets/splash_152x152.png",
+        "/assets/splash_256x256.png",
+        "/assets/app-images/manifest.json",
+        "/assets/app-images/WDF_698687.jpg",
+        "/assets/app-images/images/icons/icon-128x128.png",
+        "/assets/app-images/images/icons/icon-144x144.png",
+        "/assets/app-images/images/icons/icon-152x152.png",
+        "/assets/app-images/images/icons/icon-192x192.png",
+        "/assets/app-images/images/icons/icon-384x384.png",
+        "/assets/app-images/images/icons/icon-512x512.png",
+        "/assets/app-images/images/icons/icon-72x72.png",
+        "/assets/app-images/images/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-freshness",
+      "patterns": [
+        "\\/courses"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "version": 1
+    },
+    {
+      "name": "api-performance",
+      "patterns": [
+        "\\/"
+      ],
+      "strategy": "performance",
+      "maxSize": 100,
+      "maxAge": 14400000,
+      "timeoutMs": 5000,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/inline.894a7501669eea727ad4.bundle.js": "044664e4ff0eeba425889ada0101ad8ce502c762",
+    "/assets/bg_auth.png": "c3c3c7fe9e06ae5263a74c4ebe84aff89680bf85",
+    "/main.a3b329607e8ffd11de3c.bundle.js": "2b1bff93ae3ed45f7fa22917f809b43a947387fd",
+    "/assets/bg_login.jpg": "44499e1f1d2f73f20bc23f4d081904a819357b02",
+    "/polyfills.e6475d2787bb3154d59c.bundle.js": "8f66467832fabfb93cc80c89351f598b83d8b9d7",
+    "/assets/bg_login_png.png": "3cbb7ad89b9860c42d182effcca8be18820dd9ea",
+    "/styles.aecabc7085d572c9c9e6.bundle.css": "2815a6787dbeafd63140e457b0d05dd94c6ebcf1",
+    "/assets/icon-128x128.png": "1ed8b5b408ed910abad3f6a3983ffe35eb52f525",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/assets/icon-144x144.png": "b6a2c0b399a235b55e028c5e2bf2060f976c745c",
+    "/index.html": "fa3bd167dc92be0555dc5d55544841d01523bdbf",
+    "/assets/icon-152x152.png": "bdb9a4425396381f0dd0d490eeb2d7aa7281a30e",
+    "/assets/icon-192x192.png": "c65e7c7567853c407444d7283c8a36305531bfd9",
+    "/assets/icon-384x384.png": "6d54ca2f36b9d58b49e7dfc238b2cd40f4ff1f90",
+    "/assets/icon-512x512.png": "c974da75664ea388605edb2b441018f97965b787",
+    "/assets/icon-72x72.png": "d3ba30efcc88fa8fe7103cbc0c29bee7ef029085",
+    "/assets/icon-96x96.png": "d2e6f2fa38ebec199a61b0b0aa00b376f210fce7",
+    "/assets/splash.png": "09ad3754b281cd96d563fbd253a0a61a0fa7693c",
+    "/assets/splash_152x152.png": "d7da9ed2eba38dd63b18769e11bfbb7b7e08efcd",
+    "/assets/splash_256x256.png": "6b1d61e0e1167fb1cc16bc6f9f660b39375051d9",
+    "/assets/app-images/manifest.json": "02a9e8ae3ae9e4fdc1da8854b2ede7ecbcb63748",
+    "/assets/app-images/WDF_698687.jpg": "44499e1f1d2f73f20bc23f4d081904a819357b02",
+    "/assets/app-images/images/icons/icon-128x128.png": "1ed8b5b408ed910abad3f6a3983ffe35eb52f525",
+    "/assets/app-images/images/icons/icon-144x144.png": "b6a2c0b399a235b55e028c5e2bf2060f976c745c",
+    "/assets/app-images/images/icons/icon-152x152.png": "bdb9a4425396381f0dd0d490eeb2d7aa7281a30e",
+    "/assets/app-images/images/icons/icon-192x192.png": "c65e7c7567853c407444d7283c8a36305531bfd9",
+    "/assets/app-images/images/icons/icon-384x384.png": "6d54ca2f36b9d58b49e7dfc238b2cd40f4ff1f90",
+    "/assets/app-images/images/icons/icon-512x512.png": "c974da75664ea388605edb2b441018f97965b787",
+    "/assets/app-images/images/icons/icon-72x72.png": "d3ba30efcc88fa8fe7103cbc0c29bee7ef029085",
+    "/assets/app-images/images/icons/icon-96x96.png": "d2e6f2fa38ebec199a61b0b0aa00b376f210fce7"
+  }
+}
