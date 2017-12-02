@@ -47,7 +47,7 @@ export class LoginService{
             console.log("Testone");
           }
         });
-        this.router.navigate(['/authenticate']);
+        this.router.navigate(['/main']);
       }
      
     })
