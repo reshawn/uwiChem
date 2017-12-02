@@ -1,5 +1,7 @@
-<div *ngFor="let n of notifications | async">
-  <p>{{n.title}}</p>
-  <p>{{n.text}}</p>
-  <p>{{toDisplayableTime(n.displayTime)}}</p>
+<div  class="card" style="width: 20rem;" *ngFor="let n of notifications | async">
+    <div class="card-block">
+      <h4 class="card-title">{{n.title}}</h4>
+      <p class="card-text">{{n.text}}</p>
+      <p class="card-text">{{toDisplayableTime(n.displayTime)}}</p>
+    </div>
 </div>

@@ -27,6 +27,7 @@ import {
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import {LoginService} from '../login/login.service';
+import {NotificationService} from '../notification.service';
 
 import {GlobalsService} from '../globals.service';
 
@@ -99,6 +100,7 @@ export class CalendarComponent implements OnInit {
     private modal: NgbModal, 
     private db: AngularFireDatabase,
     private gs: GlobalsService,
+    private ns: NotificationService,
   ) {
     this.userID = loginservice.userID;
     if (gs.AuthCode === 2) this.isAdmin = true;
@@ -126,21 +128,25 @@ export class CalendarComponent implements OnInit {
           var events: any = Object.values(e);
           console.log("coming in", e);
           events.forEach(event => {
-            this.events.push({
-            title: element + ' : '+ event.title,
-            start: parse(event.start),
-            end: parse(event.end),
-            color: {
-              primary: event.colour,
-              secondary: '#FAE3E3'
-            },
-            draggable: true,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            }
-          });
+            
+            var ev:CalendarEvent= {
+              title: element + ' : '+ event.title,
+              start: parse(event.start),
+              end: parse(event.end),
+              color: {
+                primary: event.colour,
+                secondary: '#FAE3E3'
+              },
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            };
+            this.events.push(ev);
             this.newEventCourses.push(element);
+            console.log(ev);
+            // this.ns.handleNotificationFromEvent(element,ev);
             this.refresh.next(); //trigger next for all observers to get new value (update calendar to new event)
             
           })
