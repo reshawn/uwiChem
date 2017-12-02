@@ -21,7 +21,6 @@ export class MainComponent implements OnInit {
 
   selectChange(): void{ //update selected state if user changes by clicking header
     this.selected = this.group.selectedIndex;
-    console.log("Selected INDEX: " + this.selected);
 
   }
 
@@ -45,7 +44,6 @@ export class MainComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.service.AuthCode);
     
   }
   logOut(){

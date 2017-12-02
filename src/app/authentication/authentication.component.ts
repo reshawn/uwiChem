@@ -29,13 +29,13 @@ export class AuthenticationComponent implements OnInit {
    
     this.getAuthCode('/Chemistry/Auth').subscribe(AdminCode => {
       this.AdminCode=AdminCode[0]
-      console.log(this.AdminCode)
+      
     });
    this.getAuthCode('/Chemistry/Auth').subscribe(stuCode => {
     this.stuCode=stuCode[1]
-    console.log(this.stuCode)
+    
    });
-   console.log(this.loginservice.userID);
+   
   }
   getAuthCode(listPath): Observable<any[]> {
     return this.db.list(listPath).valueChanges();

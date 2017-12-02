@@ -76,12 +76,8 @@ export class LoginService {
     
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
       if (this.authstate) {
-
-        console.log(this.authstate.displayName);
-        console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
           this.authCode=Code[0]
-          console.log(this.authCode)
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
             this.service.AuthCode=1;
@@ -92,7 +88,6 @@ export class LoginService {
           }
           else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
             this.router.navigate(['/authenticate']);
-            console.log("Testone");
           }
         });
         
@@ -107,11 +102,8 @@ export class LoginService {
   loginWithFacebook() {
     this.ngFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(result => {
       if (this.authstate) {
-        console.log(this.authstate.displayName);
-        console.log(this.authstate.email);
         this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
           this.authCode=Code[0];
-          console.log(this.authCode);
           if(this.authCode=="Student"){
             this.router.navigate(['/main']);
             this.service.AuthCode=1;
@@ -122,7 +114,6 @@ export class LoginService {
           }
           else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
             this.router.navigate(['/authenticate']);
-            console.log("Testone");
           }
         });
       }
