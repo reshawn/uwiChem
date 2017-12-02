@@ -1,5 +1,71 @@
 <ul>
-  <div *ngFor="let course of coursesObservable | async">
-          <h3><a href="#">{{course.authCode}}</a> </h3>
+  <br><br>
+  <h2>My Courses</h2>
+  <div *ngFor="let course of listCourses">
+          <h3><a class="list-group-item">Course: {{course.courseCode}} {{course.title}}
+              <br>Description: {{course.description}}</a> </h3>
+         <!-- <h3><a >Description: {{course.description}}</a></h3> -->
+          
+          
+         
+          
   </div>
+  <br>
+  <br>
+  <button mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
+
+  <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Select a Course</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
+              <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
+              <br>Description: {{courseI.description}}</a></h3>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+      </div>
+  </ng-template>
+    
+
+  <!--
+  <ng-template #modalContent let-close="close">
+      <div class="modal-header">
+        <h5 class="modal-title">Courses</h5>
+        <button type="button" class="close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div *ngIf="isSelected"> 
+              <p>Select a Course</p>
+              <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
+                  <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
+                  <br>Description: {{courseI.description}}</a></h3>
+                </div>
+            </div>
+      </div>
+  </ng-template>
+-->
+
+
+
+  <!--
+  <div *ngIf="isSelected"> 
+    <p>Select a Course</p>
+    <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
+        <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
+        <br>Description: {{courseI.description}}</a></h3>
+      </div>
+  </div>
+-->
+
+
 </ul>
+
+              
