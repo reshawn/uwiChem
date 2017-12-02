@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
   error: any;
 
   constructor(private router: Router, public loginservice: LoginService) {   //add router variable after 
-
+    
   }
 
   ngOnInit() {
+
   }
 
   signInGoogle() {
@@ -31,10 +32,5 @@ export class LoginComponent implements OnInit {
   signInFacebook() {
     this.loginservice.loginWithFacebook();
   }
-
-
-  // loginWithEmail(){
-  //   this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.EmailAuthProvider());
-  // }
 
 }

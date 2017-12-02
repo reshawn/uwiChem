@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,  OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -7,13 +7,15 @@ import * as firebase from 'firebase/app';
 import {GlobalsService} from '../globals.service';
 
 @Injectable()
-export class LoginService {
+export class LoginService{
 
   authstate: any;
+  servicestate : any;
   data: any;
   addUserRef: AngularFireObject<any>;
   userEmail: String;
   userName: String;
+  userid : any;
   authCode:string;
   addStupidState:AngularFireObject<any>;
   constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase,private service:GlobalsService) {
@@ -21,9 +23,35 @@ export class LoginService {
     ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
       this.authstate = auth;
     })
-
+   
+    this.ngFireAuth.auth.onAuthStateChanged( user => {
+      if(user){
+        console.log(user.email);
+        this.userEmail = user.email;
+        this.userName = user.displayName;
+        this.userid = user.uid;
+        this.saveUserEmail(user.email);
+        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
+          this.authCode=Code[0]
+          console.log(this.authCode)
+          if(this.authCode=="Student"){
+            this.router.navigate(['/main']);
+            this.service.AuthCode=1;
+          }
+          else if(this.authCode=="Admin"){
+            this.router.navigate(['/main']);
+            this.service.AuthCode=2;
+          }
+          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
+            this.router.navigate(['/authenticate']);
+            console.log("Testone");
+          }
+        });
+        this.router.navigate(['/authenticate']);
+      }
+     
+    })
   }
-
 
   saveUserEmail(emailAddress): void {
     var splitMail: String[] = emailAddress.split("@");
@@ -74,53 +102,12 @@ export class LoginService {
   
   loginWithGoogle() {
     
-    this.ngFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(result => {
-      if (this.authstate) {
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-          }
-        });
-        
-      }
-    }).catch(error => {
-      console.log("AHH SHIBAAA");
-      console.log(error);
-    });
+    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
    
   }
 
   loginWithFacebook() {
-    this.ngFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(result => {
-      if (this.authstate) {
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0];
-          if(this.authCode=="Student"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=1;
-          }
-          else if(this.authCode=="Admin"){
-            this.router.navigate(['/main']);
-            this.service.AuthCode=2;
-          }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
-            this.router.navigate(['/authenticate']);
-          }
-        });
-      }
-    }).catch(error => {
-      console.log("AHH SHIBAAAI");
-      console.log(error);
-    });
+    this.ngFireAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
    
   }
 
@@ -140,4 +127,5 @@ export class LoginService {
   getAuthCode(listPath): Observable<any[]> {
     return this.db.list(listPath).valueChanges();
   }
+     
 }
