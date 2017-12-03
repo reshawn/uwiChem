@@ -57,6 +57,8 @@ export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
   
+  Statecode:String='';
+  StateNumber:Number=0;
   view: string = 'month';
   courses: String;
 
@@ -109,7 +111,17 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.setEvents('/Chemistry/users/'+this.userID+'/courseList');
-  }
+    this.getAuthCode('/Chemistry/users/'+this.loginservice.userID).subscribe(Code => {
+      this.Statecode=Code[0]
+      console.log(this.Statecode)
+      if(this.Statecode=="Admin"){
+        this.isAdmin=true;
+        this.refresh.next();
+        
+      }
+
+  })
+}
   setEvents(listPath): void {
     this.db.object(listPath).valueChanges().subscribe((courses: String) =>{ //get object from observable
       this.courses = courses; //assign string of courses to var
@@ -204,7 +216,9 @@ export class CalendarComponent implements OnInit {
     else this.newEventCourses.push("");
     this.refresh.next();
   }
-
+   getAuthCode(listPath): Observable<any[]> {
+    return this.db.list(listPath).valueChanges();
+  }
   saveEvents():void {
     //Because the old events are retrieved and displayed, they should be currently in the array
     //and can be edited as well, therefore the old events in the live database can be removed
