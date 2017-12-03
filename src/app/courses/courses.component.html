@@ -1,10 +1,10 @@
 <ul class="c">
   <br><br>
   <h2>My Courses</h2>
-  <div class="list-group-item" *ngFor="let course of listCourses">
-          <h3>Course:{{course.title}}
+  <div class="list-group-item" *ngFor="let course of listCourses;let i = index">
+          <h3>Course: {{course.title}}
               <br>Description: {{course.description}}
-              <button class="addCourse btn btn-danger pull-right" (click)="delete(course.courseCode)">Delete</button>
+              <button class="addCourse btn btn-danger pull-right" (click)="delete(i, course.courseCode)">Delete</button>
           </h3>
          <!-- <h3><a >Description: {{course.description}}</a></h3> -->   
   </div>
