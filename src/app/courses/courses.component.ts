@@ -49,7 +49,7 @@ export class CoursesComponent implements OnInit {
            var actualUser : any = Object.values(user);
            //console.log("THIS-> " + actualUser);
            this.user_courses = actualUser[1].split(" ");
-           console.log(this.user_courses);
+           console.log("loodydoo",this.user_courses[0]);
            this.coursesObservable.subscribe(allCourse => {
              console.log(allCourse[1]);
              this.courseArray = allCourse;
@@ -172,7 +172,12 @@ export class CoursesComponent implements OnInit {
              }
              if(flag==1)
              {
-                newCourseList= currUser[1] + " " + currCourse[0];
+                if (currUser[1]==""){
+                  newCourseList = currCourse[0];
+                }
+                else {
+                  newCourseList= currUser[1] + " " + currCourse[0];
+                }
                // console.log(newCourseList);
               //  console.log(newCourseList.length);
                 this.db.object('Chemistry/users/' + this.user_ID).update({courseList: newCourseList}).then(_=> {

@@ -1,35 +1,35 @@
 <ul class="c">
   <br><br>
   <h2>My Courses</h2>
-  <div *ngFor="let course of listCourses">
-          <h3><a class="list-group-item">Course: {{course.courseCode}} {{course.title}}
-              <br>Description: {{course.description}}</a> </h3>
-         <!-- <h3><a >Description: {{course.description}}</a></h3> -->
-          
-          
-         
-          
-  </div>
+  <!-- <div *ngIf="!isListEmpty" > -->
+    <div *ngFor="let course of listCourses">
+      <h3><a class="list-group-item">Course: {{course.courseCode}} {{course.title}}
+          <br>Description: {{course.description}}</a> </h3>
+          <!-- <h3><a >Description: {{course.description}}</a></h3> -->
+    </div>
+  <!-- </div> -->
   <br>
   <br>
   <button class="add pull-right" mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
+  <div class="addMC">
+    <ng-template #content let-c="close" let-d="dismiss" >
+        <div class="modal-header addMC">
+          <h4 class="modal-title">Add a Course</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body addMC">
+            <div *ngFor="let courseI of courseArray" class="addCourse"  (click)="onSelect(courseI)">
+                <h3><a class="list-group-item">{{courseI.courseCode}} {{courseI.title}}</a></h3>
+            </div>
+        </div>
+        <div class="modal-footer addMC">
+          <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template>
+  </div>
 
-  <ng-template #content let-c="close" let-d="dismiss">
-      <div class="modal-header">
-        <h4 class="modal-title">Select a Course</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div *ngFor="let courseI of courseArray" class="addCourse"  (click)="onSelect(courseI)">
-              <h3><a class="list-group-item">{{courseI.courseCode}} {{courseI.title}}</a></h3>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
-      </div>
-  </ng-template>
     
 
   <!--
