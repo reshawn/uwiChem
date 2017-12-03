@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { LoginService } from '../login/login.service';
 import {MatButtonModule} from '@angular/material/button';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
+import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/take';
 
 
@@ -203,8 +203,12 @@ export class CoursesComponent implements OnInit {
     this.modalService.open(content, { windowClass: 'dark-modal' });
   }
 
-
-  
-  
+  delete(courseToDelete: string){
+    let courseListRef = this.db.object<string>(`Chemistry/users/${this.user_ID}/courseList`);
+    courseListRef.valueChanges().first().subscribe(courses => {
+      courses = courses.split(' ').filter(course => course !== courseToDelete).join(' ');
+      courseListRef.set(courses);
+    });
+  }
 
 }
