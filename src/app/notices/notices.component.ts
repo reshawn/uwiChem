@@ -11,7 +11,6 @@ import 'rxjs/add/operator/first';
 export class NoticesComponent implements OnInit {
 
   notifications: BehaviorSubject<PersistableNotification[]>;
-  loaded: boolean;
 
   constructor(private notificationService: NotificationService) {
     this.notifications = new BehaviorSubject<PersistableNotification[]>(this.notificationService.retrivePeristedNotifications(true));

@@ -177,9 +177,10 @@ export class NotificationService {
 
   handleNotificationFromEvent(course: string, event: CalendarEvent){
     let notification = this.createPersistableNotificationFromEvent(course, event);
-    this.persistNotification(notification);
-    this.scheduleNotification(notification);
-    this.currentNotification.next(notification);
+    fetch('/sendMessagesForEvent', {
+      method: 'POST',
+      body: notification
+    });
   }
 }
 

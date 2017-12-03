@@ -158,7 +158,7 @@ export class CalendarComponent implements OnInit {
             this.events.push(ev);
             this.newEventCourses.push(element);
             console.log(ev);
-            // this.ns.handleNotificationFromEvent(element,ev);
+            this.ns.handleNotificationFromEvent(element,ev);
             this.refresh.next(); //trigger next for all observers to get new value (update calendar to new event)
             
           })
