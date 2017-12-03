@@ -1,17 +1,17 @@
 <ul class="c">
   <br><br>
   <h2>My Courses</h2>
-  <div *ngFor="let course of listCourses">
-          <h3><a class="list-group-item">Course: {{course.courseCode}} {{course.title}}
-              <br>Description: {{course.description}}</a> </h3>
-         <!-- <h3><a >Description: {{course.description}}</a></h3> -->
-          
-          
-         
-          
+  <div class="list-group-item" *ngFor="let course of listCourses">
+          <h3>Course: {{course.courseCode}} {{course.title}}
+              <br>Description: {{course.description}}
+              <button class="btn btn-danger pull-right" (click)="delete(course.courseCode)">Delete</button>
+          </h3>
+         <!-- <h3><a >Description: {{course.description}}</a></h3> -->   
   </div>
+
   <br>
   <br>
+  
   <button class="add pull-right" mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
 
   <ng-template #content let-c="close" let-d="dismiss">
