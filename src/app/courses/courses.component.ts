@@ -211,7 +211,8 @@ export class CoursesComponent implements OnInit {
     this.modalService.open(content, { windowClass: 'dark-modal' });
   }
 
-  delete(courseToDelete: string){
+  delete(index, courseToDelete: string){
+    this.listCourses.splice(index, 1);
     let courseListRef = this.db.object<string>(`Chemistry/users/${this.user_ID}/courseList`);
     courseListRef.valueChanges().first().subscribe(courses => {
       courses = courses.split(' ').filter(course => course !== courseToDelete).join(' ');
