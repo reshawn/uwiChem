@@ -90,6 +90,7 @@ export class CoursesComponent implements OnInit {
              this.db.object('Chemistry/courses/' + this.user_courses[x]).valueChanges().subscribe(course => {
              if(course !=null){
                 this.listCourses.push(course);
+                console.log("lc below");
                 console.log(this.listCourses);
                 //console.log(this.listCourses);
                 //console.log(x);

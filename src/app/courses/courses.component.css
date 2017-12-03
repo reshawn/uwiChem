@@ -1,0 +1,13 @@
+.list-group-item{
+    background-color: #0099ff;
+    width:90%;
+}
+.c{
+    font-family: 'Pangolin', cursive;
+}
+.add{
+    margin-right:2%;
+}
+.addCourse{
+    cursor: pointer;
+}

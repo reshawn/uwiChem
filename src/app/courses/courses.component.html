@@ -1,4 +1,4 @@
-<ul>
+<ul class="c">
   <br><br>
   <h2>My Courses</h2>
   <div *ngFor="let course of listCourses">
@@ -12,7 +12,7 @@
   </div>
   <br>
   <br>
-  <button mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
+  <button class="add pull-right" mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
 
   <ng-template #content let-c="close" let-d="dismiss">
       <div class="modal-header">
@@ -22,9 +22,8 @@
         </button>
       </div>
       <div class="modal-body">
-          <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
-              <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
-              <br>Description: {{courseI.description}}</a></h3>
+          <div *ngFor="let courseI of courseArray" class="addCourse"  (click)="onSelect(courseI)">
+              <h3><a class="list-group-item">{{courseI.courseCode}} {{courseI.title}}</a></h3>
           </div>
       </div>
       <div class="modal-footer">
