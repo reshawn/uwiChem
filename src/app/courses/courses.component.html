@@ -2,7 +2,7 @@
   <br><br>
   <h2>My Courses</h2>
   <div class="list-group-item" *ngFor="let course of listCourses;let i = index">
-          <h3>Course: {{course.title}}
+          <h3>Course: {{course.courseCode}} {{course.title}}
               <br>Description: {{course.description}}
               <button class="addCourse btn btn-danger pull-right" (click)="delete(i, course.courseCode)">Delete</button>
           </h3>
@@ -25,7 +25,7 @@
             <div *ngFor="let courseI of courseArray">
                 <h3>{{courseI.courseCode}} {{courseI.title}}
                    <button class=" addCourse btn btn-primary pull-right" (click)="onSelect(courseI)">Add</button>
-                </h3>
+                </h3><hr>
                 
             </div>
         </div>
@@ -34,40 +34,6 @@
         </div>
     </ng-template>
   </div>
-
-    
-
-  <!--
-  <ng-template #modalContent let-close="close">
-      <div class="modal-header">
-        <h5 class="modal-title">Courses</h5>
-        <button type="button" class="close" (click)="close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div *ngIf="isSelected"> 
-              <p>Select a Course</p>
-              <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
-                  <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
-                  <br>Description: {{courseI.description}}</a></h3>
-                </div>
-            </div>
-      </div>
-  </ng-template>
--->
-
-
-
-  <!--
-  <div *ngIf="isSelected"> 
-    <p>Select a Course</p>
-    <div *ngFor="let courseI of courseArray"   (click)="onSelect(courseI)">
-        <h3><a class="list-group-item">Course: {{courseI.courseCode}} {{courseI.title}}
-        <br>Description: {{courseI.description}}</a></h3>
-      </div>
-  </div>
--->
 
 
 </ul>
