@@ -18,38 +18,35 @@ export class LoginService{
   userid : any;
   authCode:string;
   addStupidState:AngularFireObject<any>;
-  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase,private service:GlobalsService) {
+  constructor(public ngFireAuth: AngularFireAuth, private router: Router, private db: AngularFireDatabase, private service: GlobalsService) {
 
     ngFireAuth.authState.subscribe(auth => {      //a promise that subscribed the observable and returns the authstate.
       this.authstate = auth;
     })
-   
-    this.ngFireAuth.auth.onAuthStateChanged( user => {
-      if(user){
-        console.log(user.email);
+
+    this.ngFireAuth.auth.onAuthStateChanged(user => {
+      if (user) {
         this.userEmail = user.email;
         this.userName = user.displayName;
         this.userid = user.uid;
         this.saveUserEmail(user.email);
-        this.getAuthCode('/Chemistry/users/'+this.authstate.uid).subscribe(Code => {
-          this.authCode=Code[0]
-          console.log(this.authCode)
-          if(this.authCode=="Student"){
+        this.getAuthCode('/Chemistry/users/' + this.authstate.uid).subscribe(Code => {
+          this.authCode = Code[0]
+          if (this.authCode == "Student") {
             this.router.navigate(['/main']);
-            this.service.AuthCode=1;
+            this.service.AuthCode = 1;
           }
-          else if(this.authCode=="Admin"){
+          else if (this.authCode == "Admin") {
             this.router.navigate(['/main']);
-            this.service.AuthCode=2;
+            this.service.AuthCode = 2;
           }
-          else if((this.authCode!="Student")&&(this.authCode!="Admin")) {
+          else if ((this.authCode != "Student") && (this.authCode != "Admin")) {
             this.router.navigate(['/authenticate']);
-            console.log("Testone");
           }
         });
         this.router.navigate(['/main']);
       }
-     
+
     })
   }
 
@@ -73,12 +70,12 @@ export class LoginService{
     if (this.authstate) {
       return this.authstate.displayName;
     }
-    
-    
+
+
   }
-  
+
   get userID(): any {
-    if(this.authstate){
+    if (this.authstate) {
       return this.authstate.uid;
     }
   }
@@ -117,15 +114,15 @@ export class LoginService{
 
 
   logout(): void {
-    if(this.authstate){
+    if (this.authstate) {
       this.ngFireAuth.auth.signOut();
       this.router.navigate(['/login'])
     }
-   
-  
+
+
   }
   getAuthCode(listPath): Observable<any[]> {
     return this.db.list(listPath).valueChanges();
   }
-     
+
 }
