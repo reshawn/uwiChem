@@ -174,8 +174,8 @@ export class NotificationService {
       title: course,
       text: event.title,
       recievedAt: Date.now(),
-      displayTime: event.start.getMilliseconds(),
-      expireAt: event.end.getMilliseconds(),
+      displayTime: event.start.getTime(),
+      expireAt: event.end.getTime(),
       icon: ''
     };
   }
