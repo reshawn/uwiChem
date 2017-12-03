@@ -164,6 +164,11 @@ export class NotificationService {
     };
   }
 
+  /**
+   * Create a notification from a calendar event for a course
+   * @param course 
+   * @param event 
+   */
   createPersistableNotificationFromEvent(course: string, event: CalendarEvent) : PersistableNotification{
     return {
       title: course,
@@ -175,6 +180,11 @@ export class NotificationService {
     };
   }
 
+  /**
+   * Send the event to the Firebase Cloud Function to send notifications to all users
+   * @param course 
+   * @param event 
+   */
   handleNotificationFromEvent(course: string, event: CalendarEvent){
     let notification = this.createPersistableNotificationFromEvent(course, event);
     fetch('/sendMessagesForEvent', {
