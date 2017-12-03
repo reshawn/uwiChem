@@ -48,7 +48,9 @@ export class CoursesComponent implements OnInit {
            this.userObject = this.db.object('Chemistry/users/' + this.user_ID);
            var actualUser : any = Object.values(user);
            //console.log("THIS-> " + actualUser);
+          
            this.user_courses = actualUser[1].split(" ");
+           if (this.user_courses[0]==="")this.user_courses = [];
            console.log("loodydoo",this.user_courses[0]);
            this.coursesObservable.subscribe(allCourse => {
              console.log(allCourse[1]);
@@ -87,11 +89,12 @@ export class CoursesComponent implements OnInit {
            for(x=0;x<this.user_courses.length;x++)
            {
             //console.log(x);
+            
              this.db.object('Chemistry/courses/' + this.user_courses[x]).valueChanges().subscribe(course => {
              if(course !=null){
                 this.listCourses.push(course);
                 console.log("lc below");
-                console.log(this.listCourses);
+                console.log(this.user_courses[x]);
                 //console.log(this.listCourses);
                 //console.log(x);
                 actualCourse = Object.values(course);
