@@ -2,9 +2,9 @@
   <br><br>
   <h2>My Courses</h2>
   <div class="list-group-item" *ngFor="let course of listCourses">
-          <h3>Course: {{course.courseCode}} {{course.title}}
+          <h3>Course:{{course.title}}
               <br>Description: {{course.description}}
-              <button class="btn btn-danger pull-right" (click)="delete(course.courseCode)">Delete</button>
+              <button class="addCourse btn btn-danger pull-right" (click)="delete(course.courseCode)">Delete</button>
           </h3>
          <!-- <h3><a >Description: {{course.description}}</a></h3> -->   
   </div>
@@ -22,12 +22,15 @@
           </button>
         </div>
         <div class="modal-body addMC">
-            <div *ngFor="let courseI of courseArray" class="addCourse"  (click)="onSelect(courseI)">
-                <h3><a class="list-group-item">{{courseI.courseCode}} {{courseI.title}}</a></h3>
+            <div *ngFor="let courseI of courseArray">
+                <h3>{{courseI.courseCode}} {{courseI.title}}
+                   <button class=" addCourse btn btn-primary pull-right" (click)="onSelect(courseI)">Add</button>
+                </h3>
+                
             </div>
         </div>
         <div class="modal-footer addMC">
-          <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+          <button type="button" class=" addCourse btn btn-outline-primary" (click)="c('Close click')">Close</button>
         </div>
     </ng-template>
   </div>
