@@ -9,6 +9,11 @@
     "rewrites": [{
       "source": "/sendMessagesForEvent",
       "function": "sendMessagesForEvent"
-    }]
+    },
+    {
+      "source": "**",
+      "destination": "/index.html"
+    }
+    ]
   }
 }
