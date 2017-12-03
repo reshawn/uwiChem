@@ -2,8 +2,8 @@ import { Injectable }          from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth }     from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import 'rxjs/add/operator/take';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/first';
 import { CalendarEvent } from 'angular-calendar';
 
 @Injectable()
@@ -48,7 +48,7 @@ export class NotificationService {
    * @param token User's FCM Token
    */
   private updateToken(token: string){
-    this.auth.authState.take(1).subscribe(user => {
+    this.auth.authState.first().subscribe(user => {
       if (!user) return;
       this.database.object(`fcmTokens/${user.uid}`).set(token);
     });
@@ -189,6 +189,9 @@ export class NotificationService {
     let notification = this.createPersistableNotificationFromEvent(course, event);
     fetch('/sendMessagesForEvent', {
       method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }), 
       body: notification
     });
   }
