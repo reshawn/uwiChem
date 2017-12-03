@@ -71,7 +71,7 @@ const appRoutes: Routes = [
     DemoUtilsModule,
     MatButtonModule,
     MatIconModule,
-    //environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
