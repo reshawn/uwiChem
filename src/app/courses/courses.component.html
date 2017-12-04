@@ -1,37 +1,39 @@
 <ul class="c">
-  <br><br>
+  <br>
+  <br>
   <h2>My Courses</h2>
   <div class="list-group-item" *ngFor="let course of listCourses;let i = index">
-          <h3>Course: {{course.courseCode}} {{course.title}}
-              <br>Description: {{course.description}}
-              <button class="addCourse btn btn-danger pull-right" (click)="delete(i, course.courseCode)">Delete</button>
-          </h3>
-         <!-- <h3><a >Description: {{course.description}}</a></h3> -->   
+    <h3>Course: {{course.courseCode}} {{course.title}}
+      <br>Description: {{course.description}}
+      <button class="addCourse btn btn-danger pull-right" (click)="delete(i, course.courseCode)">Delete</button>
+    </h3>
   </div>
 
   <br>
   <br>
-  
-  <button class="add pull-right" mat-fab color="primary" (click)="open(content)"> + </button> <!--beenSelected-->
+
+  <button class="add pull-right" mat-fab color="primary" (click)="open(content)"> + </button>
+  <!--beenSelected-->
   <div class="addMC">
-    <ng-template #content let-c="close" let-d="dismiss" >
-        <div class="modal-header addMC">
-          <h4 class="modal-title">Add a Course</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header addMC">
+        <h4 class="modal-title">Add a Course</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body addMC">
+        <div *ngFor="let courseI of courseArray">
+          <h3>{{courseI.courseCode}} {{courseI.title}}
+            <button class=" addCourse btn btn-primary pull-right" (click)="onSelect(courseI)">Add</button>
+          </h3>
+          <hr>
+
         </div>
-        <div class="modal-body addMC">
-            <div *ngFor="let courseI of courseArray">
-                <h3>{{courseI.courseCode}} {{courseI.title}}
-                   <button class=" addCourse btn btn-primary pull-right" (click)="onSelect(courseI)">Add</button>
-                </h3><hr>
-                
-            </div>
-        </div>
-        <div class="modal-footer addMC">
-          <button type="button" class=" addCourse btn btn-outline-primary" (click)="c('Close click')">Close</button>
-        </div>
+      </div>
+      <div class="modal-footer addMC">
+        <button type="button" class=" addCourse btn btn-outline-primary" (click)="c('Close click')">Close</button>
+      </div>
     </ng-template>
   </div>
 
