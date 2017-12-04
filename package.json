@@ -6,10 +6,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && firebase deploy"
+    "firebase:hosting": "firebase deploy --only hosting",
+    "deploy": "npm run build:prod && npm run firebase:hosting"
   },
   "private": true,
   "dependencies": {
