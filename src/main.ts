@@ -12,8 +12,7 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
    .then(() => {
      if ('serviceWorker' in navigator) {
-       navigator.serviceWorker.register('/ngsw-worker.js');
-       console.log("sw is registerd now");
+       navigator.serviceWorker.register('/firebase-messaging-sw.js');
      }
    })
   .catch(err => console.log(err));

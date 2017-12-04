@@ -70,8 +70,7 @@ const appRoutes: Routes = [
     CalendarModule.forRoot(),
     DemoUtilsModule,
     MatButtonModule,
-    MatIconModule,
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js'): []
+    MatIconModule
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 
