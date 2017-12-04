@@ -1,9 +1,9 @@
 <div id="pseudobody"  (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
       <div id="slideynav" >
       <mat-tab-group mat-stretch-tabs="auto" layout-fill [selectedIndex]="selected" (selectedIndexChange)="selectChange()">
-            <mat-tab label="Courses" ><div class="content"><app-courses></app-courses></div></mat-tab>
-            <mat-tab label="Calendar"><div class="content"><app-calendar></app-calendar></div></mat-tab>
-            <mat-tab label="Notices"><div class="content"><app-notices></app-notices></div></mat-tab>
+            <mat-tab label="Courses" ><div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"><app-courses></app-courses></div></mat-tab>
+            <mat-tab label="Calendar"><div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"><app-calendar></app-calendar></div></mat-tab>
+            <mat-tab label="Notices"><div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"><app-notices></app-notices></div></mat-tab>
             
       </mat-tab-group>
       <div id="pseudobody">
