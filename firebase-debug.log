@@ -1,0 +1,36 @@
+[debug] [2017-12-04T02:41:07.358Z] ----------------------------------------------------------------------
+[debug] [2017-12-04T02:41:07.363Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\resha\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2017-12-04T02:41:07.363Z] CLI Version:   3.15.4
+[debug] [2017-12-04T02:41:07.364Z] Platform:      win32
+[debug] [2017-12-04T02:41:07.364Z] Node Version:  v6.11.3
+[debug] [2017-12-04T02:41:07.365Z] Time:          Sun Dec 03 2017 22:41:07 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:07.365Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-04T02:41:07.392Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-04T02:41:07.393Z] > authorizing via signed-in user
+[debug] [2017-12-04T02:41:07.397Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-12-04T02:41:07.398Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/hrGfeFmxA6ew8jYRrzRnYK-lO_WwPEV3CrrRy2T-jrQ',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Dec 03 2017 22:41:07 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:07.799Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-04T02:41:07.854Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/uwichem  
+ Sun Dec 03 2017 22:41:07 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:08.594Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-04T02:41:08.595Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/uwichem/tokens  
+ Sun Dec 03 2017 22:41:08 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:09.236Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\resha\Downloads\Year3 Semester 1\internet tech 2\uwichem\uwiChem'...
+[info] 
+[debug] [2017-12-04T02:41:09.241Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/uwichem  
+ Sun Dec 03 2017 22:41:09 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:09.756Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-04T02:41:09.757Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/297331885020/clients/_:getWebAppConfig  
+ Sun Dec 03 2017 22:41:09 GMT-0400 (Venezuela Standard Time)
+[debug] [2017-12-04T02:41:10.439Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] +  hosting: Local server: http://localhost:5000
+
