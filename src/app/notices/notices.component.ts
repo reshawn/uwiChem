@@ -24,7 +24,6 @@ export class NoticesComponent implements OnInit {
     });
     this.notificationService.currentNotification.subscribe(notification => {
       if(notification === null) return;
-      //console.log("Notiifcation: ", notification);
       this.notifications.next(this.notificationService.retrivePeristedNotifications());
     });
   }

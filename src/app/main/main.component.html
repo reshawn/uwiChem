@@ -6,12 +6,9 @@
             <mat-tab label="Notices"><div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"><app-notices></app-notices></div></mat-tab>
             
       </mat-tab-group>
-      <div id="pseudobody">
-      <!-- <button mat-mini-fab>
-                  <mat-icon icon="logout" >logout</mat-icon>
-      </button>  -->
-
-      <a (click) = "logOut()" class="btn-social btn-logout"><i class="fa fa-sign-out"></i></a>
+      <a (click)="logOut()" class="btn-social btn-logout">
+            <i class="fa fa-sign-out"></i>
+      </a>
 
       </div>
 </div>

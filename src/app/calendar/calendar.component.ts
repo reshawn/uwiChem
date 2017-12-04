@@ -106,14 +106,12 @@ export class CalendarComponent implements OnInit {
   ) {
     this.userID = loginservice.userID;
     if (gs.AuthCode === 2) this.isAdmin = true;
-    console.log(gs.AuthCode);
    }
 
   ngOnInit() {
     this.setEvents('/Chemistry/users/'+this.userID+'/courseList');
     this.getAuthCode('/Chemistry/users/'+this.loginservice.userID).subscribe(Code => {
       this.Statecode=Code[0]
-      console.log(this.Statecode)
       if(this.Statecode=="Admin"){
         this.isAdmin=true;
         this.refresh.next();
@@ -125,7 +123,6 @@ export class CalendarComponent implements OnInit {
   setEvents(listPath): void {
     this.db.object(listPath).valueChanges().subscribe((courses: String) =>{ //get object from observable
       this.courses = courses; //assign string of courses to var
-      console.log(this.courses);
       if (this.courses!=null)
         this.getEvents();
     });
@@ -138,7 +135,6 @@ export class CalendarComponent implements OnInit {
         if (e!=null){
           this.events = []; this.newEventCourses = [];
           var events: any = Object.values(e);
-          console.log("coming in", e);
           events.forEach(event => {
             
             var ev:CalendarEvent= {
@@ -157,7 +153,6 @@ export class CalendarComponent implements OnInit {
             };
             this.events.push(ev);
             this.newEventCourses.push(element);
-            console.log(ev);
             this.ns.handleNotificationFromEvent(element,ev);
             this.refresh.next(); //trigger next for all observers to get new value (update calendar to new event)
             
@@ -226,7 +221,6 @@ export class CalendarComponent implements OnInit {
     
     
     var evs = [];
-    // console.log(coursesToClear,this.events,this.newEventCourses);
 
     this.eventCourses.forEach((c)=>{
       this.events.forEach((event,index) =>{
@@ -237,8 +231,6 @@ export class CalendarComponent implements OnInit {
             desc = event.title;
           else
             desc = realTitle.slice(1,realTitle.length).join(" : ");
-          console.log("colo:",event.color.primary);
-          console.log("desc",realTitle);
           var e = {
             title:desc,
             start:event.start,

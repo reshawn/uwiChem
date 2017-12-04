@@ -6,10 +6,6 @@
   background-image: url("/assets/bg_login_png.png") ;
   background-size: cover;
 }
-/* .title{
-    
-  font-family: 'Quicksand', sans-serif;
-} */
 
 
 #loginForm{
@@ -18,14 +14,11 @@
   padding-right: 10em;
   background: rgb(204, 204, 204);
   background: rgba(204, 204, 204, 0.5);
-  /* filter:blur(1.5px); */
+
   
 
 }
 
-.loginbtn{
-    /* padding-top: 2em; */
-}
 
 
   a.btn-social,

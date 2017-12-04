@@ -25,16 +25,12 @@ export class MainComponent implements OnInit {
   }
 
   swipe(eType){ //change selected tab if user swipes the content of a tab
-    console.log(eType);
     if(eType === this.SWIPE_ACTION.RIGHT && this.selected > 0){
-      console.log("movin left")
       this.selected--;
     }
     else if(eType === this.SWIPE_ACTION.LEFT && this.selected < this.tab_num){
-      console.log("movin right")
       this.selected++;
     }
-    console.log(this.selected)
   }
 
 
@@ -47,7 +43,6 @@ export class MainComponent implements OnInit {
     
   }
   logOut(){
-    console.log("SHH SHAABA");
     this.loginservice.logout() ;
   }
 }
