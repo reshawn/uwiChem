@@ -4,9 +4,9 @@
   <h2>My Courses</h2>
   <div class="list-group-item" *ngFor="let course of listCourses;let i = index">
     <h3>Course: {{course.courseCode}} {{course.title}}
-      <br>Description: {{course.description}}
       <button class="addCourse btn btn-danger pull-right" (click)="delete(i, course.courseCode)">Delete</button>
     </h3>
+    <br> <p> Description: {{course.description}} </p> 
   </div>
 
   <br>
@@ -24,9 +24,9 @@
       </div>
       <div class="modal-body addMC">
         <div *ngFor="let courseI of courseArray">
-          <h3>{{courseI.courseCode}} {{courseI.title}}
+          <p class="h5">{{courseI.courseCode}} {{courseI.title}}
             <button class=" addCourse btn btn-primary pull-right" (click)="onSelect(courseI)">Add</button>
-          </h3>
+          </p>
           <hr>
 
         </div>
